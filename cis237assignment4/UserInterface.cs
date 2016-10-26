@@ -1,203 +1,530 @@
-﻿using System;
+﻿//Jeffrey Martin
+//CIS 237 Assignment 4
+//Due 11-08-2016
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;//Needed to maxamize the console
+using System.Runtime.InteropServices;//Needed to maxamize the console
 
-namespace cis237assignment4
+namespace cis237assignment3
 {
-    //Class to handle all of the User Interface operations
-    class UserInterface
+    public class UserInterface
     {
-        //Create a class level variable for the droid collection
-        IDroidCollection droidCollection;
+        //***************************************
+        //Variables
+        //***************************************
 
-        //Constructor that will take in a droid collection to use
-        public UserInterface(IDroidCollection DroidCollection)
+        //Utility Droids
+        bool toolboxBool;
+        bool computerConnectionBool;
+        bool armBool;
+
+        string[,] _materialList =
+                { { "plastic", ".5" },
+                {"steele", "1" },
+                {"Plass-Steele", "1.5"},
+                {"Nevo-Titanium", "2" },
+                {"Areogel","2.5" },
+                {"Atomic-Aluminum","5" }};
+
+        string[] _droidList = { "Protocol", "Utility", "Janitor", "Astromech" };
+
+        //****************************************Code to Maxamize the Console***********************
+        [DllImport("kernel32.dll", ExactSpelling = true)]
+        private static extern IntPtr GetConsoleWindow();
+        private static IntPtr ThisConsole = GetConsoleWindow();
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+        private const int HIDE = 0;
+        private const int MAXIMIZE = 3;
+        private const int MINIMIZE = 6;
+        private const int RESTORE = 9;
+
+        /// <summary>
+        /// Method to maxamize the console window
+        /// </summary>
+        private static void MaximizeConsole()
         {
-            this.droidCollection = DroidCollection;
+            Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
+            ShowWindow(ThisConsole, MAXIMIZE);
+        }
+        //************************************End Code to Maxamize the Console***********************
+
+        /// <summary>
+        /// Adjust the console to increase the console buffer, change the title and maxamize the window
+        /// </summary>
+        public void StartUserInterface()
+        {
+            Console.BufferHeight = Int16.MaxValue - 1;
+            Console.Title = "Jawas of Tatooine Droids Sales List Program";
+            MaximizeConsole();
         }
 
-        //Method to display the welcome message of the program
-        public void DisplayGreeting()
+        /// <summary>
+        /// Print out the Load Menu and returns the input from the user
+        /// </summary>
+        /// <returns>ConsoleKeyInfo</returns>
+        private ConsoleKeyInfo LoadMenuMessage()
         {
-            Console.WriteLine("Welcome to the Droid Inventory System");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            Console.Write("- Load Menu -");
+            Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("1) Load Droid list");
+            Console.WriteLine("2) Continue without loading Droid list");
+            Console.WriteLine("3) Exit");
+            Console.WriteLine("Press number of item you wish to do.");
+
+            return Console.ReadKey();
+        }
+
+        /// <summary>
+        /// Makes sure the user enters valid data from LoadMenuMessage and returns it after casting it into an integer
+        /// </summary>
+        /// <returns>int</returns>
+        public int LoadMenu()
+        {
+            ConsoleKeyInfo inputChar = LoadMenuMessage();
+            Console.WriteLine();
+
+            //Continue getting user input until the user enters valid input
+            while (inputChar.KeyChar != '1' && inputChar.KeyChar != '2' && inputChar.KeyChar != '3')
+            {
+                ErrorMessage();
+                inputChar = LoadMenuMessage();
+                Console.WriteLine();
+            }
+            return int.Parse(inputChar.KeyChar.ToString());
+        }
+
+        /// <summary>
+        /// Prints out the List Loaded message
+        /// </summary>
+        public void ListLoadedMessage()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            Console.Write("- List Loaded -");
+            Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
         }
 
-        //Method to display the main menu
-        public void DisplayMainMenu()
+        /// <summary>
+        /// Print out the Main Menu and returns the input from the user
+        /// </summary>
+        /// <returns>ConsoleKeyInfo</returns>
+        private ConsoleKeyInfo MainMenuMessage()
         {
-            Console.WriteLine("What would you like to do?");
-            Console.WriteLine("1. Add a new droid to the system");
-            Console.WriteLine("2. Print the list of droids out");
-            Console.WriteLine("3. Exit the program");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            Console.Write("- Main Menu -");
+            Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("1) Print Droid list");
+            Console.WriteLine("2) Add Droid to list");
+            Console.WriteLine("3) Delete Droid from list");
+            Console.WriteLine("4) Exit");
+            Console.WriteLine("Press number of item you wish to do.");
+            return Console.ReadKey();
         }
 
-        //Method to get a menu choice
-        public int GetMenuChoice()
+        /// <summary>
+        /// Makes sure the user enters valid data from ManMenuMessage and returns it after casting it into an integer
+        /// </summary>
+        /// <returns>int</returns>
+        public int MainMenu()
         {
-            //Display prompt and get the input from the user
-            Console.Write("> ");
-            string choice = Console.ReadLine();
+            ConsoleKeyInfo inputChar = MainMenuMessage();
+            Console.WriteLine();
 
-            //Set a variable for the menu choice to 0. Try to parse the input, if successful, return the menu choice.
-            int menuChoice = 0;
-            try
+            //Continue getting user input until the user enters valid input
+            while (inputChar.KeyChar != '1' && inputChar.KeyChar != '2' && inputChar.KeyChar != '3' && inputChar.KeyChar != '4')
             {
-                menuChoice = Int32.Parse(choice);
+                ErrorMessage();
+                inputChar = MainMenuMessage();
+                Console.WriteLine();
             }
-            catch (Exception e)
-            {
-                menuChoice = 0;
-            }
-
-            return menuChoice;
+            return int.Parse(inputChar.KeyChar.ToString());
         }
 
-        //Method to do the work of creating a new droid
-        public void CreateDroid()
+        /// <summary>
+        /// Prints out the Droid List
+        /// </summary>
+        /// <param name="OutputString">string[]</param>
+        public void PrintDroidList(string[] OutputString)
         {
-            //Prompt for color selection
-            this.displayColorSelection();
-            //Get the choice that the user makes
-            int choice = this.GetMenuChoice();
+            Console.Write("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            Console.Write("- Start List -");
+            Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            Console.WriteLine();
 
-            //If the choice is not valid, loop until it is valid, or the user cancels the operation
-            while(choice < 1 || choice > 4)
+            //Takes the OutputString passed in and prints out each item as a seperate line
+            for (int i = 0; i < OutputString.Length; i++)
             {
-                //Prompt for a valid choice
-                this.displayColorSelection();
-                choice = this.GetMenuChoice();
+                Console.WriteLine(OutputString[i]);
+                Console.WriteLine();
+            }
+            Console.Write("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            Console.Write("- End List -");
+            Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            Console.WriteLine();
+        }
+
+        /// <summary>
+        /// Adds a droid to the Droid Collection by getting user information
+        /// </summary>
+        /// <param name="droidCollection">DroidCollection</param>
+        public void AddDroidSequence(DroidCollection droidCollection)
+        {
+            //***************************************
+            //Local Variables
+            //***************************************
+
+            //All Droids
+            string materialString;
+            string modelString;
+            string colorString;
+
+            //Protocol Droids
+            int numberLanguagesInt;
+
+            //Janitor Droids
+            bool trashCompactorBool;
+            bool vacuumBool;
+
+            //Astromech Droids
+            bool fireExtinquisher;
+            int numberShips;
+
+
+            //Get the user data of the type of droid to be added
+            ConsoleKeyInfo inputChar = DroidTypeMenu();
+            Console.WriteLine();
+
+            //Make sure the user inputs the correct data
+            while (inputChar.KeyChar != '1' && inputChar.KeyChar != '2' && inputChar.KeyChar != '3' && inputChar.KeyChar != '4')
+            {
+                ErrorMessage();
+                inputChar = DroidTypeMenu();
+                Console.WriteLine();
             }
 
-            //Check the choice against the possibilities
-            //If there is one found, work on getting the next piece of information.
-            switch(choice)
+            // Parse the validated user data 
+            int droidTypeInputInt = int.Parse(inputChar.KeyChar.ToString());
+
+            //Get the type of the Droid from the modelString
+            modelString = _droidList[droidTypeInputInt - 1];
+
+            //Get the type of materail from the user
+            int materialTypeInputInt = DroidMaterialMenu();
+
+            //Get the type of material from the materalString based on the user input
+            materialString = _materialList[materialTypeInputInt - 1, 0];
+
+            //Get the color from the user
+            colorString = DroidColorMenu();
+
+            //Takes the base droid type and get additonal information for each droid type than adds the droid to the DroidCollection
+            switch (droidTypeInputInt)
             {
-                case 1:
-                    this.chooseMaterial("Bronze");
+                case 1: //Protocol
+                    //Get the number of languges from the user
+                    numberLanguagesInt = NumberInput("How many languages do you wish the droid to understand?");
+                    //Add droid to DroidCollection
+                    droidCollection.AddNewItem(materialString, modelString, colorString, numberLanguagesInt);
+                    break;
+                case 2://Utility
+                    //Call the method to get the input from user for the Utility Droid
+                    BaseUtilityDroidInputs();
+                    //Add droid to DroidCollection
+                    droidCollection.AddNewItem(materialString, modelString, colorString, toolboxBool, computerConnectionBool, armBool);
+                    break;
+                case 3://Janitor
+                    //Call the method to get the input from user for the Utility Droid
+                    BaseUtilityDroidInputs();
+                    //Find out if the user wants a trash compactor
+                    trashCompactorBool = BoolInput("Do you wish for your droid to have a trash compactor");
+                    //Find out if the user wants a Vacuum
+                    vacuumBool = BoolInput("Do you wish for your droid to have a vacuum");
+                    //Add droid to DroidCollection
+                    droidCollection.AddNewItem(materialString, modelString, colorString,
+                        toolboxBool, computerConnectionBool, armBool, trashCompactorBool, vacuumBool);
+                    break;
+                default://Astromech
+                    //Call the method to get the input from user for the Utility Droid
+                    BaseUtilityDroidInputs();
+                    //Find out if the user wants a fire extinguiser
+                    fireExtinquisher = BoolInput("Do you wish for your droid to have fire extinquisher");
+                    //Find out the number of ships the mech has data on
+                    numberShips = NumberInput("How many ships do you wish the droid to have data on?");
+                    //Add droid to DroidCollection
+                    droidCollection.AddNewItem(materialString, modelString, colorString,
+                        toolboxBool, computerConnectionBool, armBool, fireExtinquisher, numberShips);
                     break;
 
-                case 2:
-                    this.chooseMaterial("Silver");
-                    break;
-
-                case 3:
-                    this.chooseMaterial("Gold");
-                    break;
             }
+            //Print out the Droid added message
+            DroidAddedMessage();
+
         }
 
-        //Method to print out the droid list
-        public void PrintDroidList()
+        /// <summary>
+        /// Finds out which Droid the user wants deleted and deletes it
+        /// </summary>
+        /// <param name="droidCollection">DroidCollection</param>
+        public void DeleteDroid(DroidCollection droidCollection)
         {
+            //Gets the number of the droid to be deleted from the user
+            int droidNumber = GetDroidNumber(droidCollection);
+
+            //Output the message to confirm the droid to be deleted.
             Console.WriteLine();
-            Console.WriteLine(this.droidCollection.GetPrintString());
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("Droid to delete:");
+            Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            //Calls the method to print out a single droid from the DroidCollection
+            Console.WriteLine(droidCollection.GetASingleDroid(droidNumber));
+            Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+            //Gets the user input to confirm to delete the droid
+            bool deleteDroid = BoolInput("Are you sure you want to delete the prevous droid?");
+
+            if (deleteDroid)
+            {//Delete the droid now that it has been confirmed and tell the user it has been deleted and reprint the list
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                droidCollection.DeleteItem(droidNumber);
+                Console.WriteLine("Droid Delted!");
+            }
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
-        //Display the Model Selection
-        private void displayModelSelection()
+        /// <summary>
+        /// Gets the number of the droid to delete from the user and validates the data
+        /// </summary>
+        /// <param name="droidCollection"></param>
+        /// <returns>int</returns>
+        private int GetDroidNumber(DroidCollection droidCollection)
         {
-            Console.WriteLine();
-            Console.WriteLine("What type of droid is it?");
-            Console.WriteLine("1. Protocol");
-            Console.WriteLine("2. Utility");
-            Console.WriteLine("3. Janitorial");
-            Console.WriteLine("4. Astromech");
-            Console.WriteLine("5. Cancel This Operation");
-        }
+            //Get the number from the user
+            int numberOfDroid = NumberInput("Which numbered droid do you wish to delete?");
 
-        //Display the Material Selection
-        private void displayMaterialSelection()
-        {
-            Console.WriteLine();
-            Console.WriteLine("What material is the droid made out of?");
-            Console.WriteLine("1. Carbonite");
-            Console.WriteLine("2. Vanadium");
-            Console.WriteLine("3. Quadranium");
-            Console.WriteLine("4. Cancel This Operation");
-        }
-
-        //Display the Color Selection
-        private void displayColorSelection()
-        {
-            Console.WriteLine();
-            Console.WriteLine("What color is the droid?");
-            Console.WriteLine("1. Bronze");
-            Console.WriteLine("2. Silver");
-            Console.WriteLine("3. Gold");
-            Console.WriteLine("4. Cancel This Operation");
-        }
-
-        //Display the Number of Languages Selection
-        private void displayNumberOfLanguageSelection()
-        {
-            Console.WriteLine();
-            Console.WriteLine("How many languages does the droid know?");
-        }
-
-        //Display and get the utility options
-        private bool[] displayAndGetUtilityOptions()
-        {
-            Console.WriteLine();
-            bool option1 = this.displayAndGetOption("Does the droid have a toolbox?");
-            Console.WriteLine();
-            bool option2 = this.displayAndGetOption("Does the droid have a computer connection?");
-            Console.WriteLine();
-            bool option3 = this.displayAndGetOption("Does the droid have an arm?");
-
-            bool[] returnArray = {option1, option2, option3};
-            return returnArray;
-        }
-
-        //Display and get the Janatorial options
-        private bool[] displayAndGetJanatorialOptions()
-        {
-            Console.WriteLine();
-            bool option1 = this.displayAndGetOption("Does the droid have a trash compactor?");
-            Console.WriteLine();
-            bool option2 = this.displayAndGetOption("Does the droid have a vaccum?");
-
-            bool[] returnArray = { option1, option2 };
-            return returnArray;
-        }
-
-        //Display and get the astromech options
-        private bool displayAndGetAstromechOption()
-        {
-            Console.WriteLine();
-            return this.displayAndGetOption("Does the droid have a fire extinguisher?");
-        }
-
-        //Display and get the number of ships
-        private int displayAndGetAstromechNumberOfShips()
-        {
-            Console.WriteLine();
-            Console.WriteLine("How many ships has the droid worked on?");
-            int choice = this.GetMenuChoice();
-
-            while (choice <= 0)
+            //Continue to get the user input until they enter a valid number
+            while ((numberOfDroid < 1) || (numberOfDroid > droidCollection.NumberOfDroidsInList))
             {
-                Console.WriteLine("Not a valid number of ships");
-                Console.WriteLine("How many ships as the droid worked on?");
-                choice = this.GetMenuChoice();
+                ErrorMessage();
+                numberOfDroid = NumberInput("Which numbered droid do you wish to delete?");
             }
-            return choice;
+            //Subtracting one to make it equal to the index
+            return numberOfDroid - 1;
         }
 
-        //Method to display and get a general option
-        //It ensures that Y or N is the typed response
-        private bool displayAndGetOption(string optionString)
+        /// <summary>
+        /// Get the input need for the Utility Mech to be added
+        /// </summary>
+        private void BaseUtilityDroidInputs()
+        {//Used a method sice it needs to be used for 3 droids
+            //Find out if the user wants a toolbos
+            toolboxBool = BoolInput("Do you wish for your droid to have a toolbox");
+            //Find out if the user wants a computer connection
+            computerConnectionBool = BoolInput("Do you wish for your droid to have a computer connection");
+            //Find out if the user wants an arm
+            armBool = BoolInput("Do you wish for your droid to have an arm");
+        }
+
+        /// <summary>
+        /// Prints out the Droid types and gets the user's input
+        /// </summary>
+        /// <returns>ConsoleKeyInfo</returns>
+        private ConsoleKeyInfo DroidTypeMenu()
         {
-            Console.WriteLine(optionString + " (y/n)");
-            string choice = Console.ReadLine();
-            while (choice.ToUpper() != "Y" && choice.ToUpper() != "N")
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.Write("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            Console.Write("- Creating a New Droid -");
+            Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("1) Protocol Droid");
+            Console.WriteLine("2) Utility Droid");
+            Console.WriteLine("3) Janitor Droid");
+            Console.WriteLine("4) Astromech Droid");
+            Console.Write("Press the number of the type Droid you wish create: ");
+            return Console.ReadKey();
+        }
+
+        /// <summary>
+        /// Creates the Droid Materail Menu and gets the users input
+        /// </summary>
+        /// <returns>ConsoleKeyInf</returns>
+        private ConsoleKeyInfo DroidMaterialMenuMessage()
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+
+            //Makes sure there is somthing in the _materialList
+            if (_materialList != null && _materialList.GetLength(0) < 10)
             {
-                Console.WriteLine(optionString);
-                choice = Console.ReadLine();
+                //Prints out the Matial list with the cost multiplier
+                for (int index = 0; index < _materialList.GetLength(0); index++)
+                {
+                    Console.WriteLine($"{index + 1}) {_materialList[index, 0]} - cost mulitpler is: {_materialList[index, 1]}");
+                }
+                Console.Write("Press the number of the material you wish the droid made from: ");
+                Console.ForegroundColor = ConsoleColor.White;
             }
-            if (choice.ToUpper() == "Y")
+            //Gets the users input
+            return Console.ReadKey();
+        }
+
+        /// <summary>
+        /// Makes sure that the input from the DroidMaterialMenuMessage is valid and if so casts it into an integer
+        /// </summary>
+        /// <returns>int</returns>
+        private int DroidMaterialMenu()
+        {
+            bool NotValidData = true;
+            int materialTypeInt = 0;
+            //Gets the users input
+            ConsoleKeyInfo inputChar;
+
+            while (NotValidData)
+            {
+                inputChar = DroidMaterialMenuMessage();
+                try
+                {
+                    //Parse the data to see if it causes an error
+                    materialTypeInt = int.Parse(inputChar.KeyChar.ToString());
+
+                    //Check to see if the integer is within the valid range
+                    if ((materialTypeInt > 0) && (materialTypeInt <= _materialList.GetLength(0)))
+                    {
+                        NotValidData = false;
+                    }
+                    else
+                    {
+                        ErrorMessage();
+                    }
+                }
+                catch
+                {
+                    ErrorMessage();
+                }
+            }
+            return materialTypeInt;
+        }
+
+        /// <summary>
+        /// Gets the color from the user
+        /// </summary>
+        /// <returns></returns>
+        public string DroidColorMenu()
+        {
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.Write("Enter the color you wish the droid to be: ");
+            string inputString = Console.ReadLine();
+            //Allows any string to be entered as long as there is one.
+            while (inputString == "")
+            {
+                ErrorMessage();
+                Console.Write("Enter the color you wish the droid to be: ");
+                inputString = Console.ReadLine();
+            }
+            return inputString;
+        }
+
+        /// <summary>
+        /// Generic user interface to get an integer for QuestionString asked.
+        /// </summary>
+        /// <param name="QuestionString">string</param>
+        /// <returns>int</returns>
+        public int NumberInput(string QuestionString)
+        {
+            bool dataNotValid = true;
+            int numbLangInt = 0;
+
+            string inputString = GetNumberInput(QuestionString);
+            //If no input get error message and try again
+
+            while (dataNotValid)
+            {
+                if (inputString == "")
+                {
+                    ErrorMessage();
+                    inputString = GetNumberInput(QuestionString);
+                }
+                else
+                {
+                    //Make sure there is an integer inside
+                    try
+                    {
+                        numbLangInt = int.Parse(inputString);
+                        dataNotValid = false;
+                    }
+                    catch
+                    {
+                        ErrorMessage();
+                        inputString = GetNumberInput(QuestionString);
+                    }
+                }
+            }
+            return numbLangInt;
+        }
+
+        public string GetNumberInput(string QuestionString)
+        {
+            Console.WriteLine();
+            Console.Write(QuestionString + " ");
+            //Get the users input
+            string inputString = Console.ReadLine();
+            return inputString;
+        }
+
+        /// <summary>
+        /// Message displayed when a droid is added
+        /// </summary>
+        public void DroidAddedMessage()
+        {
+            Console.WriteLine("Droid has been added to the bottom of the list");
+        }
+
+        /// <summary>
+        /// Standard error message
+        /// </summary>
+        public void ErrorMessage()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine();
+            Console.WriteLine(" Invalid Entry please try again.");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        /// <summary>
+        /// Generic method to test if a yes/no question was answered correctly and assign appropiate bool value 
+        /// </summary>
+        /// <param name="YesNoQuestion"></param>
+        /// <returns>bool</returns>
+        public bool BoolInput(string YesNoQuestion)
+        {
+            ConsoleKeyInfo inputKey;
+            //Print out the YesNoQuestion and get the users response
+            inputKey = GetBoolInput(YesNoQuestion);
+
+            //Get user response until correct data input
+            while (inputKey.KeyChar != 'y' && inputKey.KeyChar != 'Y' && inputKey.KeyChar != 'n' && inputKey.KeyChar != 'N')
+            {
+                ErrorMessage();
+                inputKey = GetBoolInput(YesNoQuestion);
+            }
+
+            //Assign correct bool value
+            if (inputKey.KeyChar == 'y' || inputKey.KeyChar == 'Y')
             {
                 return true;
             }
@@ -207,132 +534,38 @@ namespace cis237assignment4
             }
         }
 
-        //Method to choose the Material for the droid. It accepts Color as the parameter
-        private void chooseMaterial(string Color)
+        /// <summary>
+        /// Generic method to print out the YesNoQuestion and get the users response
+        /// </summary>
+        /// <param name="YesNoQuestion"></param>
+        /// <returns>ConsoleKeyInfo</returns>
+        public ConsoleKeyInfo GetBoolInput(string YesNoQuestion)
         {
-            //Display the material selection
-            this.displayMaterialSelection();
-            //get the users choice
-            int choice = this.GetMenuChoice();
-
-            //while the chioce is not valid, wait until there is a valid one
-            while (choice < 0 || choice > 4)
-            {
-                this.displayMaterialSelection();
-                choice = this.GetMenuChoice();
-            }
-
-            //Check to see which choice was chosen. Call choose model and pass the color an material over
-            //to the method to get the model
-            switch(choice)
-            {
-                case 1:
-                    this.chooseModel(Color, "Carbonite");
-                    break;
-                        
-                case 2:
-                    this.chooseModel(Color, "Vanadium");
-                    break;
-
-                case 3:
-                    this.chooseModel(Color, "Quadranium");
-                    break;
-
-            }
+            ConsoleKeyInfo tempConsoleKeyInfo;
+            Console.WriteLine();
+            Console.WriteLine($"{YesNoQuestion}?");
+            Console.WriteLine("(Y)es or (N)o");
+            tempConsoleKeyInfo = Console.ReadKey();
+            Console.WriteLine();
+            return tempConsoleKeyInfo;
         }
 
-        //Method to choose a model and decide what other input is needed based on the selected model
-        private void chooseModel(string Color, string Material)
+        /// <summary>
+        /// Message to print when no droids are in the DroidCollection
+        /// </summary>
+        public void NoDroidsInListMessage()
         {
-            //Display the menu to choose which model
-            this.displayModelSelection();
-            //Get the model choice
-            int choice = this.GetMenuChoice();
-
-            //While the choice is not valid, keep prompting for a choice
-            while (choice < 0 || choice > 5)
-            {
-                //Display the menu again, and ask for the option again.
-                this.displayModelSelection();
-                choice = this.GetMenuChoice();
-            }
-
-            //Based on the choice, call the next set of crieteria that needs to be determined
-            switch (choice)
-            {
-                case 1:
-                    this.chooseNumberOfLanguages(Color, Material, "Protocol");
-                    break;
-
-                case 2:
-                    this.chooseOptions(Color, Material, "Utility");
-                    break;
-
-                case 3:
-                    this.chooseOptions(Color, Material, "Janatorial");
-                    break;
-
-                case 4:
-                    this.chooseOptions(Color, Material, "Astromech");
-                    break;
-            }
+            Console.WriteLine("No droids in the list. Need to add droids before you can delete one.");
         }
 
-        //Method to choose the number of langages that a droid knows. It accepts the values that were determined
-        //in the past methods. This method will also add a droid based on the collected information.
-        private void chooseNumberOfLanguages(string Color, string Material, string Model)
+        /// <summary>
+        /// Message to display when exiting the program.
+        /// </summary>
+        public void ExitMessage()
         {
-            //Display the number of languages selection
-            this.displayNumberOfLanguageSelection();
-            //Get the users choice
-            int choice = this.GetMenuChoice();
-
-            //While the choice is not valid, keep prompting for a valid one.
-            while (choice < 0)
-            {
-                Console.WriteLine("Not a valid number of languages");
-                this.displayNumberOfLanguageSelection();
-                choice = this.GetMenuChoice();
-            }
-
-            //The only droid that we can add with this criteria is a protocol droid, so add it to the droid collection
-            this.droidCollection.Add(Material, Model, Color, choice);
-
+            Console.WriteLine("Exiting the Jawas of Tatooine Droids Sales List Program");
+            Console.Write("Press any key to exit. . .");
+            Console.ReadKey();
         }
-
-        //Method to figure out which of the utility droids the user is creating, and then work on collecting the rest
-        //of the needed information to create the droid.
-        private void chooseOptions(string Color, string Material, string Model)
-        {
-            //Display and get the utility options.
-            bool[] standardOptions = this.displayAndGetUtilityOptions();
-
-            //Based on the model chosen, figure out the remaining information needed.
-            switch(Model)
-            {
-                //If it is a utility
-                case "Utility":
-                    this.droidCollection.Add(Material, Model, Color, standardOptions[0], standardOptions[1], standardOptions[2]);
-                    break;
-
-                //If it is a Janatorial
-                case "Janatorial":
-                    //Get the rest of the options for a Janatorial droid.
-                    bool[] janatorialOptions = this.displayAndGetJanatorialOptions();
-                    //Add it to the collection
-                    this.droidCollection.Add(Material, Model, Color, standardOptions[0], standardOptions[1], standardOptions[2], janatorialOptions[0], janatorialOptions[1]);
-                    break;
-
-                //If it is a Astromech
-                case "Astromech":
-                    //Get the rest of the options for an astromech
-                    bool astromechOption = this.displayAndGetAstromechOption();
-                    int astromechNumberOfShips = this.displayAndGetAstromechNumberOfShips();
-                    //Add it to the collection
-                    this.droidCollection.Add(Material, Model, Color, standardOptions[0], standardOptions[1], standardOptions[2], astromechOption, astromechNumberOfShips);
-                    break;
-            }
-        }
-
     }
 }

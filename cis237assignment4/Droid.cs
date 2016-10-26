@@ -1,70 +1,139 @@
-﻿using System;
+﻿//Jeffrey Martin
+//CIS 237 Assignment 4
+//Due 11-08-2016
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cis237assignment4
+namespace cis237assignment3
 {
-    //Abstract class that implements the IDroid interface
-    abstract class Droid : IDroid
+    public abstract class Droid : IDroid
     {
-        //some protected variables for the class
-        protected string material;
-        protected string model;
-        protected string color;
+        //***************************************
+        //Variables
+        //***************************************
+        string _materialString;
+        string _modelString;
+        string _color_string;
+        decimal _baseCostDecimal;
+        decimal _totalCostDecimal;
+        string[,] _materialList =
+            { { "plastic", ".5" },
+                {"steele", "1" },
+                {"Plass-Steele", "1.5"},
+                {"Nevo-Titanium", "2" },
+                {"Areogel","2.5" },
+                {"Atomic-Aluminum","5" }};
+        string[] _droidList = { "Protocol", "Utility", "Janitor", "Astromech" };
 
-        protected decimal baseCost;
-        protected decimal totalCost;
+        //***************************************
+        //Properties
+        //***************************************
 
-        //The public property for TotalCost
         public decimal TotalCost
         {
-            get { return totalCost; }
-            set { totalCost = value; }
-        }
-
-        //Constructor that takes the main 3 parameters shared amongst all 4 types of droids
-        public Droid(string Material, string Model, string Color)
-        {
-            this.material = Material;
-            this.model = Model;
-            this.color = Color;
-        }
-
-        //Virtual method that can be overridden in the derived classes if needed.
-        //This implementation calculates the cost based on the material used for the droid
-        protected virtual void CalculateBaseCost()
-        {
-            switch (this.material)
+            get
             {
-                case "Carbonite":
-                    this.baseCost = 100.00m;
-                    break;
+                return _totalCostDecimal;
+            }
 
-                case "Vanadium":
-                    this.baseCost = 120.00m;
-                    break;
-
-                case "Quadranium":
-                    this.baseCost = 150.00m;
-                    break;
-
-                default:
-                    this.baseCost = 50.00m;
-                    break;
+            set
+            {
+                _totalCostDecimal = value;
             }
         }
 
-        //Abstract method that MUST be overriden in the derived class to calculate the total cost
-        public abstract void CalculateTotalCost();
+        //***************************************
+        //Method
+        //***************************************
 
-        //Overriden toString method that will return a string representing the basic information for any droid
+        /// <summary>
+        /// Used to calcualte the total cost
+        /// </summary>
+        virtual public void CalculateTotalCost()
+        {
+            //At the this level the total cost is the base cost.
+            CalculateBaseCost();
+            _totalCostDecimal = _baseCostDecimal;
+        }
+
+        /// <summary>
+        /// Overide method to create information string for each droid
+        /// </summary>
+        /// <returns>string</returns>
         public override string ToString()
         {
-            return "Material: " + this.material + Environment.NewLine +
-                    "Model: " + this.model + Environment.NewLine +
-                    "Color: " + this.color + Environment.NewLine;
+            return _color_string + " " + _materialString + " " + _modelString + " Droid";
         }
+
+        /// <summary>
+        /// Calculates the base cost for each dfoid type.
+        /// </summary>
+        public void CalculateBaseCost()
+        {
+            //Get the MaterialMultipler which is based on the tye of matterial used.
+            decimal materialMultiplier = MaterialCostMultiplier(_materialString);
+
+            //Gets the cost for each type of model
+            switch (_modelString)
+            {
+                case "Protocol":
+                    _baseCostDecimal = 500m;
+                    break;
+                case "Utility":
+                    _baseCostDecimal = 200m;
+                    break;
+                case "Janitor":
+                    _baseCostDecimal = 350m;
+                    break;
+                case "Astromech":
+                    _baseCostDecimal = 450m;
+                    break;
+            }
+            // Calculate the base cost now that we have the model cost and material multiplier
+            _baseCostDecimal = _baseCostDecimal * materialMultiplier;
+        }
+
+        /// <summary>
+        /// Finds the value mulitplier from the _materialList based on material
+        /// </summary>
+        /// <param name="Material"></param>
+        /// <returns>decimal</returns>
+        public decimal MaterialCostMultiplier(string Material)
+        {
+            decimal materialCostDecimal = 0;
+
+            for (int index = 0; index < _materialList.GetLength(0); index++)
+            {
+                if (Material == _materialList[index, 0])
+                {
+                    materialCostDecimal = decimal.Parse(_materialList[index, 1]);
+                }
+            }
+
+            return materialCostDecimal;
+        }
+
+
+        //***************************************
+        //Constructor
+        //***************************************
+
+        /// <summary>
+        /// Every droid will have these base parameters
+        /// </summary>
+        /// <param name="MaterialString">string</param>
+        /// <param name="ModelString">string</param>
+        /// <param name="ColorString">string</param>
+        public Droid(string MaterialString, string ModelString, string ColorString)
+        {
+            _materialString = MaterialString;
+            _modelString = ModelString;
+            _color_string = ColorString;
+        }
+
+
     }
 }

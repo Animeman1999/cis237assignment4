@@ -1,21 +1,29 @@
-﻿using System;
+﻿//Jeffrey Martin
+//CIS 237 Assignment 4
+//Due 11-08-2016
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cis237assignment4
+namespace cis237assignment3
 {
-    //Interface that I added to declare what methods MUST be implemeted in any class that implements this interface.
+    /// <summary>
+    /// Make sure that the DroidCollection will have 4 overloaded methods for AddNewItem
+    /// </summary>
     interface IDroidCollection
     {
-        //Various overloaded Add methods to add a new droid to the collection
-        bool Add(string Material, string Model, string Color, int NumberOfLanguages);
-        bool Add(string Material, string Model, string Color, bool HasToolBox, bool HasComputerConnection, bool HasArm);
-        bool Add(string Material, string Model, string Color, bool HasToolBox, bool HasComputerConnection, bool HasArm, bool HasTrashCompactor, bool HasVaccum);
-        bool Add(string Material, string Model, string Color, bool HasToolBox, bool HasComputerConnection, bool HasArm, bool HasFireExtinguisher, int NumberOfShips);
-        
-        //Method to get the data for a droid into a nicely formated string that can be output.
-        string GetPrintString();
+        void AddNewItem(string MaterialString, string ModelString, string ColorString, int NumberLanguagesInt);
+
+        void AddNewItem(string MaterialString, string ModelString, string ColorString, bool ToolboxBool, bool ComputerConnectionBool, bool ArmBool);
+
+        void AddNewItem(string MaterialString, string ModelString, string ColorString, bool ToolboxBool,
+            bool ComputerConnectionBool, bool ArmBool, bool TrashCompactorBool, bool VacuumBool);
+
+        void AddNewItem(string MaterialString, string ModelString, string ColorString, bool ToolboxBool,
+            bool ComputerConnectionBool, bool ArmBool, bool FireExtinquisher, int NumberShips);
     }
+
+
 }

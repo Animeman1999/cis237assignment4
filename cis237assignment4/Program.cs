@@ -1,52 +1,88 @@
-﻿using System;
+﻿//Jeffrey Martin
+//CIS 237 Assignment 4
+//Due 11-08-2016
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cis237assignment4
+namespace cis237assignment3
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            //Create a new droid collection and set the size of it to 100.
-            IDroidCollection droidCollection = new DroidCollection(100);
+            //***************************************
+            //Variables
+            //***************************************
 
-            //Create a user interface and pass the droidCollection into it as a dependency
-            UserInterface userInterface = new UserInterface(droidCollection);
+            string materialTest = "plastic";
+            string DroidTypeTest = "Protocol";
+            string colorTest = "red";
+            int numberLanguagesTest = 1000;
+            int menuChoice;
+            const int DROID_COLLECTION_SIZE = 1000;
 
-            //Display the main greeting for the program
-            userInterface.DisplayGreeting();
+            //Create a single DroidCollection to be used for the entire program
+            DroidCollection droidCollection = new DroidCollection(DROID_COLLECTION_SIZE);
 
-            //Display the main menu for the program
-            userInterface.DisplayMainMenu();
+            //Create a single UserInterface to be used for the entire program
+            UserInterface ui = new UserInterface();
 
-            //Get the choice that the user makes
-            int choice = userInterface.GetMenuChoice();
+            //Create the console to be used
+            ui.StartUserInterface();
 
-            //While the choice is not equal to 3, continue to do work with the program
-            while (choice != 3)
+            //Create the LoadMenu and load the user choice
+            menuChoice = ui.LoadMenu();
+
+            // Either user wants to load a droid list or  not
+            switch (menuChoice)
             {
-                //Test which choice was made
-                switch (choice)
-                {
-                    //Choose to create a droid
-                    case 1:
-                        userInterface.CreateDroid();
-                        break;
+                case 1:
+                    droidCollection.AddNewItem(materialTest, DroidTypeTest, colorTest, numberLanguagesTest);
+                    droidCollection.AddNewItem("steele", "Utility", "white", true, true, true);
+                    droidCollection.AddNewItem("Plass-Steele", "Janitor", "blue", true, true, false, true, true);
+                    droidCollection.AddNewItem("Nevo-Titanium", "Astromech", "orange", true, false, true, true, 10);
 
-                    //Choose to Print the droid
-                    case 2:
-                        userInterface.PrintDroidList();
-                        break;
-                }
-                //Re-display the menu, and re-prompt for the choice
-                userInterface.DisplayMainMenu();
-                choice = userInterface.GetMenuChoice();
+                    ui.ListLoadedMessage();
+
+                    break;
+                case 2:// If droidCollection was not created need to start by adding a droid.
+                    ui.AddDroidSequence(droidCollection);
+                    break;
             }
 
+            //Continue to loop until the user chooses 4 which is to exit.
+            while (menuChoice != 4)
+            {
+                menuChoice = ui.MainMenu();
+                switch (menuChoice)
+                {
+                    case 1://Print out the droid list
+                        ui.PrintDroidList(droidCollection.GetListOfAllDroids());
+                        break;
+                    case 2://Add a new droid to the DroidCollection
+                        ui.AddDroidSequence(droidCollection);
+                        break;
+                    case 3://Delete a droid from the DroidCollection
+                           //Make sure the DroidCollection has Droids in them
+                        if (droidCollection.NumberOfDroidsInList > 0)
+                        {
+                            ui.PrintDroidList(droidCollection.GetListOfAllDroids());
+                            ui.DeleteDroid(droidCollection);
+                        }
+                        else
+                        {
+                            ui.NoDroidsInListMessage();
+                        }
 
+                        break;
+                    default://Exit the program
+                        ui.ExitMessage();
+                        break;
+                }
+            }
         }
     }
 }
