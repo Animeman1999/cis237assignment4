@@ -14,8 +14,12 @@ namespace cis237assignment3.Tests
         [TestMethod()]
         public void ToStringTest()
         {
-            Protocol testProtocol1 = new Protocol("A", "B", "C", 10);
-            Assert.Fail();
+            Protocol testProtocol1 = new Protocol("Nevo-Titanium", "Protocol", "Green", 100);
+            string actual = testProtocol1.ToString();
+
+            string expected = "Green Nevo-Titanium Protocol Droid" + Environment.NewLine;
+            expected += " Speaks 100 languages";
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod()]
@@ -25,7 +29,7 @@ namespace cis237assignment3.Tests
             testProtocol1.CalculateTotalCost();
             decimal actual = testProtocol1.TotalCost;
 
-            decimal expected = 245m;
+            decimal expected = 1035m;
 
             Assert.AreEqual(expected, actual);
         }
