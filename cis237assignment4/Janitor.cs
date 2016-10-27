@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
+[assembly: InternalsVisibleTo("cis237assignment4Tests")]
 
 namespace cis237assignment3
 {
-    public class Janitor : Utility
+    class Janitor : Utility
     {
         //***************************************
         //Variables
@@ -18,6 +20,12 @@ namespace cis237assignment3
         bool _vacuumBool;
         const decimal TRASH_COMPATOR_COST = 35M;
         const decimal VACUUM_COST = 20M;
+
+        //***************************************
+        //Properties
+        //***************************************
+        public bool TrashCompactor { get { return _trashCompactorBool; } }
+        public bool Vacuum { get { return _vacuumBool; } }
 
         //***************************************
         //Method

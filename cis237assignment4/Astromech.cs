@@ -19,6 +19,14 @@ namespace cis237assignment3
         const decimal FIRE_EXTINGUISHER_COST = 5M;
         const decimal COST_PER_SHIP = 2M;
 
+
+        //***************************************
+        //Properties
+        //***************************************
+
+        public bool FireExtinguisher { get { return _fireExtinquisher; } }
+        public int NumberOfShips { get { return _numberShips; } }
+
         //***************************************
         //Method
         //***************************************

@@ -23,6 +23,13 @@ namespace cis237assignment3
         const decimal ARM_COST = 50M;
 
         //***************************************
+        //Properties
+        //***************************************
+        public bool Toolbox { get { return _toolboxBool; } }
+        public bool ComputerConnection { get { return _computerConnectionBool; } }
+        public bool Arm { get { return _armBool; } }
+
+        //***************************************
         //Method
         //***************************************
 
@@ -70,6 +77,7 @@ namespace cis237assignment3
             _toolboxBool = ToolboxBool;
             _computerConnectionBool = ComputerConnectionBool;
             _armBool = ArmBool;
+            
         }
     }
 }

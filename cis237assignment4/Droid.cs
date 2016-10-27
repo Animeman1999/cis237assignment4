@@ -14,9 +14,9 @@ namespace cis237assignment3
         //***************************************
         //Variables
         //***************************************
-        string _materialString;
-        string _modelString;
-        string _color_string;
+        protected string _materialString;
+        protected string _modelString;
+        protected string _color_string;
         decimal _baseCostDecimal;
         decimal _totalCostDecimal;
         string[,] _materialList =
@@ -31,6 +31,10 @@ namespace cis237assignment3
         //***************************************
         //Properties
         //***************************************
+
+        public string Material { get { return _materialString; } }
+        public string Model { get { return _modelString; } }
+        public string Color { get { return _color_string; } }
 
         public decimal TotalCost
         {

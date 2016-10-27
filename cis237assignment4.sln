@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cis237assignment4", "cis237assignment4\cis237assignment4.csproj", "{1FBB9307-E772-4AD6-A641-1B8D3258D579}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cis237assignment4Tests", "cis237assignment4Tests\cis237assignment4Tests.csproj", "{2D5D362B-4727-45FA-8ADD-B864AF7EEC8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{1FBB9307-E772-4AD6-A641-1B8D3258D579}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FBB9307-E772-4AD6-A641-1B8D3258D579}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FBB9307-E772-4AD6-A641-1B8D3258D579}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D5D362B-4727-45FA-8ADD-B864AF7EEC8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D5D362B-4727-45FA-8ADD-B864AF7EEC8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D5D362B-4727-45FA-8ADD-B864AF7EEC8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D5D362B-4727-45FA-8ADD-B864AF7EEC8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
