@@ -17,11 +17,12 @@ namespace cis237assignment3.Tests
             Utility testUtility1 = new Utility("plastic", "Utility", "Red", true, true, true);
             string actual = testUtility1.ToString();
 
-            string expected = "Red plastic Utility Droid" + Environment.NewLine;
-            expected += " Toolbox = True" + Environment.NewLine;
-            expected += " Computer Connection = True" + Environment.NewLine;
-            expected += " Arm = True";
-            Assert.AreEqual(expected, actual);
+            StringAssert.Contains(actual, "Red");
+            StringAssert.Contains(actual, "plastic");
+            StringAssert.Contains(actual, "Utility");
+            StringAssert.Contains(actual, " Toolbox = True");
+            StringAssert.Contains(actual, " Computer Connection = True");
+            StringAssert.Contains(actual, " Arm = True");
         }
 
         [TestMethod()]
