@@ -5,13 +5,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace cis237assignment3.Tests
 {
     [TestClass()]
     public class UserInterfaceTests
     {
+        UserInterface testUI = new UserInterface();
+
         [TestMethod()]
+
         public void StartUserInterfaceTest()
         {
             Assert.Fail();
@@ -20,7 +24,23 @@ namespace cis237assignment3.Tests
         [TestMethod()]
         public void LoadMenuTest()
         {
-            Assert.Fail();
+            StringBuilder actualOutput = replaceConsole();
+            ///////////////////////////////////////////////////////////////////////////ERROR DOES NOT LOAD INPUT
+            testUI.LoadMenu();
+
+            StringAssert.Contains("Load Menu", actualOutput.ToString());
+            StringAssert.Contains("1) Load Droid list", actualOutput.ToString());
+            StringAssert.Contains("2) Continue without loading Droid list", actualOutput.ToString());
+            StringAssert.Contains("3) Exit", actualOutput.ToString());
+            StringAssert.Contains("Press number of item you wish to do.", actualOutput.ToString());
+        }
+
+        private static StringBuilder replaceConsole()
+        {
+            StringBuilder actualOutput = new StringBuilder();
+            StringWriter sw = new StringWriter(actualOutput);
+            Console.SetOut(sw);
+            return actualOutput;
         }
 
         [TestMethod()]
