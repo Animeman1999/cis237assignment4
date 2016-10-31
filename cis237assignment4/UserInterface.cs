@@ -32,6 +32,8 @@ namespace cis237assignment3
 
         string[] _droidList = { "Protocol", "Utility", "Janitor", "Astromech" };
 
+        public string [,] MaterialList { get { return _materialList; } }
+
         //****************************************Code to Maxamize the Console***********************
         [DllImport("kernel32.dll", ExactSpelling = true)]
         private static extern IntPtr GetConsoleWindow();
@@ -67,7 +69,7 @@ namespace cis237assignment3
         /// Print out the Load Menu and returns the input from the user
         /// </summary>
         /// <returns>ConsoleKeyInfo</returns>
-        private ConsoleKeyInfo LoadMenuMessage()
+        private string LoadMenuMessage()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
@@ -80,7 +82,7 @@ namespace cis237assignment3
             Console.WriteLine("3) Exit");
             Console.WriteLine("Press number of item you wish to do.");
 
-            return Console.ReadKey();
+            return Console.ReadLine();
         }
 
         /// <summary>
@@ -89,17 +91,17 @@ namespace cis237assignment3
         /// <returns>int</returns>
         public int LoadMenu()
         {
-            ConsoleKeyInfo inputChar = LoadMenuMessage();
+            string inputString = LoadMenuMessage();
             Console.WriteLine();
 
             //Continue getting user input until the user enters valid input
-            while (inputChar.KeyChar != '1' && inputChar.KeyChar != '2' && inputChar.KeyChar != '3')
+            while (inputString.Trim() != "1" && inputString.Trim() != "2" && inputString.Trim() != "3")
             {
                 ErrorMessage();
-                inputChar = LoadMenuMessage();
+                inputString = LoadMenuMessage();
                 Console.WriteLine();
             }
-            return int.Parse(inputChar.KeyChar.ToString());
+            return int.Parse(inputString.Trim());
         }
 
         /// <summary>
@@ -119,7 +121,7 @@ namespace cis237assignment3
         /// Print out the Main Menu and returns the input from the user
         /// </summary>
         /// <returns>ConsoleKeyInfo</returns>
-        private ConsoleKeyInfo MainMenuMessage()
+        private String MainMenuMessage()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
@@ -132,7 +134,7 @@ namespace cis237assignment3
             Console.WriteLine("3) Delete Droid from list");
             Console.WriteLine("4) Exit");
             Console.WriteLine("Press number of item you wish to do.");
-            return Console.ReadKey();
+            return Console.ReadLine();
         }
 
         /// <summary>
@@ -141,17 +143,17 @@ namespace cis237assignment3
         /// <returns>int</returns>
         public int MainMenu()
         {
-            ConsoleKeyInfo inputChar = MainMenuMessage();
+            string inputString = MainMenuMessage();
             Console.WriteLine();
 
             //Continue getting user input until the user enters valid input
-            while (inputChar.KeyChar != '1' && inputChar.KeyChar != '2' && inputChar.KeyChar != '3' && inputChar.KeyChar != '4')
+            while (inputString.Trim() != "1" && inputString.Trim() != "2" && inputString.Trim() != "3" && inputString.Trim() != "4")
             {
                 ErrorMessage();
-                inputChar = MainMenuMessage();
+                inputString = MainMenuMessage();
                 Console.WriteLine();
             }
-            return int.Parse(inputChar.KeyChar.ToString());
+            return int.Parse(inputString.Trim());
         }
 
         /// <summary>
@@ -205,19 +207,19 @@ namespace cis237assignment3
 
 
             //Get the user data of the type of droid to be added
-            ConsoleKeyInfo inputChar = DroidTypeMenu();
+            string inputString = DroidTypeMenu();
             Console.WriteLine();
 
             //Make sure the user inputs the correct data
-            while (inputChar.KeyChar != '1' && inputChar.KeyChar != '2' && inputChar.KeyChar != '3' && inputChar.KeyChar != '4')
+            while (inputString.Trim() != "1" && inputString.Trim() != "2" && inputString.Trim() != "3" && inputString.Trim() != "4")
             {
                 ErrorMessage();
-                inputChar = DroidTypeMenu();
+                inputString = DroidTypeMenu();
                 Console.WriteLine();
             }
 
             // Parse the validated user data 
-            int droidTypeInputInt = int.Parse(inputChar.KeyChar.ToString());
+            int droidTypeInputInt = int.Parse(inputString.Trim());
 
             //Get the type of the Droid from the modelString
             modelString = _droidList[droidTypeInputInt - 1];
@@ -329,7 +331,7 @@ namespace cis237assignment3
         /// Get the input need for the Utility Mech to be added
         /// </summary>
         private void BaseUtilityDroidInputs()
-        {//Used a method sice it needs to be used for 3 droids
+        {//Used a method since it needs to be used for 3 droids
             //Find out if the user wants a toolbos
             toolboxBool = BoolInput("Do you wish for your droid to have a toolbox");
             //Find out if the user wants a computer connection
@@ -342,7 +344,7 @@ namespace cis237assignment3
         /// Prints out the Droid types and gets the user's input
         /// </summary>
         /// <returns>ConsoleKeyInfo</returns>
-        private ConsoleKeyInfo DroidTypeMenu()
+        private string DroidTypeMenu()
         {
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.Write("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
@@ -354,15 +356,15 @@ namespace cis237assignment3
             Console.WriteLine("2) Utility Droid");
             Console.WriteLine("3) Janitor Droid");
             Console.WriteLine("4) Astromech Droid");
-            Console.Write("Press the number of the type Droid you wish create: ");
-            return Console.ReadKey();
+            Console.Write("Enter the number of the type Droid you wish create: ");
+            return Console.ReadLine();
         }
 
         /// <summary>
         /// Creates the Droid Materail Menu and gets the users input
         /// </summary>
         /// <returns>ConsoleKeyInf</returns>
-        private ConsoleKeyInfo DroidMaterialMenuMessage()
+        private string DroidMaterialMenuMessage()
         {
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -379,7 +381,7 @@ namespace cis237assignment3
                 Console.ForegroundColor = ConsoleColor.White;
             }
             //Gets the users input
-            return Console.ReadKey();
+            return Console.ReadLine();
         }
 
         /// <summary>
@@ -391,15 +393,15 @@ namespace cis237assignment3
             bool NotValidData = true;
             int materialTypeInt = 0;
             //Gets the users input
-            ConsoleKeyInfo inputChar;
+            String inputString;
 
             while (NotValidData)
             {
-                inputChar = DroidMaterialMenuMessage();
+                inputString = DroidMaterialMenuMessage();
                 try
                 {
                     //Parse the data to see if it causes an error
-                    materialTypeInt = int.Parse(inputChar.KeyChar.ToString());
+                    materialTypeInt = int.Parse(inputString.Trim());
 
                     //Check to see if the integer is within the valid range
                     if ((materialTypeInt > 0) && (materialTypeInt <= _materialList.GetLength(0)))
@@ -512,19 +514,19 @@ namespace cis237assignment3
         /// <returns>bool</returns>
         public bool BoolInput(string YesNoQuestion)
         {
-            ConsoleKeyInfo inputKey;
+            string inputKey;
             //Print out the YesNoQuestion and get the users response
             inputKey = GetBoolInput(YesNoQuestion);
 
             //Get user response until correct data input
-            while (inputKey.KeyChar != 'y' && inputKey.KeyChar != 'Y' && inputKey.KeyChar != 'n' && inputKey.KeyChar != 'N')
+            while (inputKey.ToLower().Trim() != "y" && inputKey.ToLower().Trim() != "yes" && inputKey.ToLower().Trim() != "n" && inputKey.ToLower().Trim() != "no")
             {
                 ErrorMessage();
                 inputKey = GetBoolInput(YesNoQuestion);
             }
 
             //Assign correct bool value
-            if (inputKey.KeyChar == 'y' || inputKey.KeyChar == 'Y')
+            if (inputKey.ToLower().Trim() == "y" || inputKey.ToLower().Trim() == "yes")
             {
                 return true;
             }
@@ -539,15 +541,14 @@ namespace cis237assignment3
         /// </summary>
         /// <param name="YesNoQuestion"></param>
         /// <returns>ConsoleKeyInfo</returns>
-        public ConsoleKeyInfo GetBoolInput(string YesNoQuestion)
+        public string GetBoolInput(string YesNoQuestion)
         {
-            ConsoleKeyInfo tempConsoleKeyInfo;
             Console.WriteLine();
             Console.WriteLine($"{YesNoQuestion}?");
-            Console.WriteLine("(Y)es or (N)o");
-            tempConsoleKeyInfo = Console.ReadKey();
+            Console.WriteLine("Yes or No");
+            string tempStringInfo = Console.ReadLine();
             Console.WriteLine();
-            return tempConsoleKeyInfo;
+            return tempStringInfo;
         }
 
         /// <summary>
@@ -564,8 +565,8 @@ namespace cis237assignment3
         public void ExitMessage()
         {
             Console.WriteLine("Exiting the Jawas of Tatooine Droids Sales List Program");
-            Console.Write("Press any key to exit. . .");
-            Console.ReadKey();
+            Console.Write("Press Enter to exit. . .");
+            Console.ReadLine();
         }
     }
 }
