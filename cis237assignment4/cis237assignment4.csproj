@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Astromech.cs" />
+    <Compile Include="CSVProcessor.cs" />
     <Compile Include="Droid.cs" />
     <Compile Include="DroidCollection.cs" />
     <Compile Include="IDroid.cs" />
