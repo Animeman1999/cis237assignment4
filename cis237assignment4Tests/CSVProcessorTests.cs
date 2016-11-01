@@ -17,7 +17,7 @@ namespace cis237assignment3.Tests
             DroidCollection testDroidCollection = new DroidCollection(10);
             CSVProcessor csvProcessor = new CSVProcessor();
             csvProcessor.ReadFile("4DroidModelTest.csv", testDroidCollection);
-
+            Assert.IsNotNull(testDroidCollection);
             Assert.AreEqual(4, testDroidCollection.NumberOfDroidsInList);
         }
 
