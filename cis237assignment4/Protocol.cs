@@ -37,8 +37,7 @@ namespace cis237assignment3
         /// <returns>string</returns>
         public override string ToString()
         {
-            return base.ToString() + Environment.NewLine +
-                " Speaks " + _numberLanguages.ToString() + " languages";
+            return base.ToString() + "," + _numberLanguages.ToString();
         }
 
         /// <summary>

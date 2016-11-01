@@ -44,6 +44,40 @@ namespace cis237assignment3
             }
         }
 
+        public void WriteFile(string csvFilePath, DroidCollection droidCollection)
+        {
+            StreamWriter streamWriter = null;
+
+            try
+            {
+                string outputString;
+
+                streamWriter = new StreamWriter(csvFilePath);
+
+                int counter = 0;
+                while (counter < droidCollection.NumberOfDroidsInList)
+                {
+                    outputString = droidCollection.GetASingleDroid(counter);
+                    streamWriter.WriteLine(outputString);
+                    counter++;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                Console.WriteLine();
+                Console.WriteLine(e.StackTrace);
+            }
+
+            finally
+            {
+                if (streamWriter != null)
+                {
+                    streamWriter.Close();
+                }
+            }
+        }
+
         public bool ConvertBool(string BoolString)
         {
             if (BoolString == "true")
@@ -90,10 +124,7 @@ namespace cis237assignment3
                         droidCollection.AddNewItem(materialString, modelString, colorString, toolboxBool, computerConnectionBool, armBool, fireExtinguisherBool,numberShipsInt);
                         break;
                 }
-            }
-
-            
-            
+            }           
         }
     }
 }

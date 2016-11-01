@@ -38,8 +38,7 @@ namespace cis237assignment3
         /// <returns>string</returns>
         public override string ToString()
         {
-            return base.ToString() + Environment.NewLine + " Fire Extinquisher = " + _fireExtinquisher +
-                Environment.NewLine + " Number of Ships = " + _numberShips;
+            return base.ToString() +"," + _fireExtinquisher +"," + _numberShips;
         }
 
         /// <summary>

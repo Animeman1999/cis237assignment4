@@ -17,12 +17,23 @@ namespace cis237assignment3
             //Variables
             //***************************************
 
+            //UserInterface testUI = new UserInterface();
+            //CSVProcessor TestcsvProcessor = new CSVProcessor();
+            //DroidCollection testDroidCollection = new DroidCollection(10);
+            //TestcsvProcessor.ReadFile("4DroidModelTest.csv", testDroidCollection);
+            //Console.WriteLine("Result = " + testDroidCollection.NumberOfDroidsInList);
+            //testUI.PrintDroidList(testDroidCollection.GetListOfAllDroids());
+            //Console.ReadLine();
+
             string materialTest = "plastic";
             string DroidTypeTest = "Protocol";
             string colorTest = "red";
             int numberLanguagesTest = 1000;
+            bool arrayHasChanged = false;
             int menuChoice;
             const int DROID_COLLECTION_SIZE = 1000;
+            CSVProcessor csvProcessor = new CSVProcessor();
+            string csvFileAndPath = "DroidList.csv";
 
             //Create a single DroidCollection to be used for the entire program
             DroidCollection droidCollection = new DroidCollection(DROID_COLLECTION_SIZE);
@@ -40,10 +51,8 @@ namespace cis237assignment3
             switch (menuChoice)
             {
                 case 1:
-                    droidCollection.AddNewItem(materialTest, DroidTypeTest, colorTest, numberLanguagesTest);
-                    droidCollection.AddNewItem("steele", "Utility", "white", true, true, true);
-                    droidCollection.AddNewItem("Plass-Steele", "Janitor", "blue", true, true, false, true, true);
-                    droidCollection.AddNewItem("Nevo-Titanium", "Astromech", "orange", true, false, true, true, 10);
+                    
+                    csvProcessor.ReadFile(csvFileAndPath, droidCollection);
 
                     ui.ListLoadedMessage();
 
@@ -64,6 +73,7 @@ namespace cis237assignment3
                         break;
                     case 2://Add a new droid to the DroidCollection
                         ui.AddDroidSequence(droidCollection);
+                        arrayHasChanged = true;
                         break;
                     case 3://Delete a droid from the DroidCollection
                            //Make sure the DroidCollection has Droids in them
@@ -71,6 +81,7 @@ namespace cis237assignment3
                         {
                             ui.PrintDroidList(droidCollection.GetListOfAllDroids());
                             ui.DeleteDroid(droidCollection);
+                            arrayHasChanged = true;
                         }
                         else
                         {
@@ -79,6 +90,11 @@ namespace cis237assignment3
 
                         break;
                     default://Exit the program
+                        if (arrayHasChanged)
+                        {
+                            csvProcessor.WriteFile(csvFileAndPath, droidCollection);
+                            Console.WriteLine(csvFileAndPath + " has been saved.");
+                        }
                         ui.ExitMessage();
                         break;
                 }

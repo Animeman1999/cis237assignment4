@@ -35,8 +35,7 @@ namespace cis237assignment3
         /// <returns>string</returns>
         public override string ToString()
         {
-            return base.ToString() + Environment.NewLine + " Trash Compactor = " + _trashCompactorBool +
-                Environment.NewLine + " Vacum = " + _vacuumBool;
+            return base.ToString() + "," + _trashCompactorBool + "," + _vacuumBool;
         }
 
         /// <summary>

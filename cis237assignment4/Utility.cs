@@ -41,10 +41,7 @@ namespace cis237assignment3
         /// <returns>string</returns>
         public override string ToString()
         {
-            return base.ToString() + Environment.NewLine +
-                " Toolbox = " + _toolboxBool + Environment.NewLine +
-                " Computer Connection = " + _computerConnectionBool + Environment.NewLine +
-                " Arm = " + _armBool;
+            return base.ToString() + "," + _toolboxBool + "," + _computerConnectionBool + "," + _armBool;
         }
 
 

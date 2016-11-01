@@ -69,7 +69,7 @@ namespace cis237assignment3
         /// <returns>string</returns>
         public override string ToString()
         {
-            return _color_string + " " + _materialString + " " + _modelString + " Droid";
+            return _materialString + "," + _modelString + "," + _color_string;
         }
 
         /// <summary>
