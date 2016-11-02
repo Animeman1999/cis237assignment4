@@ -16,7 +16,7 @@ namespace cis237assignment3.Tests
         {
             DroidCollection testDroidCollection = new DroidCollection(10);
             CSVProcessor csvProcessor = new CSVProcessor();
-            csvProcessor.ReadFile("4DroidModelTest.csv", testDroidCollection);
+            csvProcessor.ReadFile("../../../Files/4DroidModelTest.csv", testDroidCollection);
             Assert.IsNotNull(testDroidCollection);
             Assert.AreEqual(4, testDroidCollection.NumberOfDroidsInList);
         }
@@ -29,6 +29,7 @@ namespace cis237assignment3.Tests
             Assert.IsTrue(testBoolIsTrue);
         }
 
+        //This test is redundant so not done.
         //[TestMethod()]
         //public void processRecordTest()
         //{

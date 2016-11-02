@@ -17,12 +17,13 @@ namespace cis237assignment3
             //Variables
             //***************************************
 
-            DroidCollection testDroidCollection = new DroidCollection(10);
-            CSVProcessor csvProcessor = new CSVProcessor();
-            csvProcessor.ReadFile("4DroidModelTest.csv", testDroidCollection);
-            string teststring = testDroidCollection.GetASingleDroid(1);
-            Console.WriteLine(teststring);
-            Console.ReadLine();
+            //UserInterface testUI = new UserInterface();
+            //CSVProcessor TestcsvProcessor = new CSVProcessor();
+            //DroidCollection testDroidCollection = new DroidCollection(10);
+            //TestcsvProcessor.ReadFile("4DroidModelTest.csv", testDroidCollection);
+            //Console.WriteLine("Result = " + testDroidCollection.NumberOfDroidsInList);
+            //testUI.PrintDroidList(testDroidCollection.GetListOfAllDroids());
+            //Console.ReadLine();
 
             string materialTest = "plastic";
             string DroidTypeTest = "Protocol";
@@ -31,8 +32,8 @@ namespace cis237assignment3
             bool arrayHasChanged = false;
             int menuChoice;
             const int DROID_COLLECTION_SIZE = 1000;
-            //CSVProcessor csvProcessor = new CSVProcessor();
-            string csvFileAndPath = "DroidList.csv";
+            CSVProcessor csvProcessor = new CSVProcessor();
+            string csvFileAndPath = "../../../Files/DroidList.csv";
 
             //Create a single DroidCollection to be used for the entire program
             DroidCollection droidCollection = new DroidCollection(DROID_COLLECTION_SIZE);
