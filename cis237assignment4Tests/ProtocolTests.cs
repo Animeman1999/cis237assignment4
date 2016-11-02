@@ -17,8 +17,7 @@ namespace cis237assignment3.Tests
             Protocol testProtocol1 = new Protocol("Nevo-Titanium", "Protocol", "Green", 100);
             string actual = testProtocol1.ToString();
 
-            string expected = "Green Nevo-Titanium Protocol Droid" + Environment.NewLine;
-            expected += " Speaks 100 languages";
+            string expected = "Nevo-Titanium,Protocol,Green,100";
             Assert.AreEqual(expected, actual);
         }
 

@@ -24,13 +24,15 @@ namespace cis237assignment3.Tests
         [TestMethod()]
         public void ConvertBoolTest()
         {
-            Assert.Fail();
+            CSVProcessor csvProcessor = new CSVProcessor();
+            bool testBoolIsTrue = csvProcessor.ConvertBool("true");
+            Assert.IsTrue(testBoolIsTrue);
         }
 
-        [TestMethod()]
-        public void processRecordTest()
-        {
-            Assert.Fail();
-        }
+        //[TestMethod()]
+        //public void processRecordTest()
+        //{
+        //    Assert.Fail();
+        //}
     }
 }

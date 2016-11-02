@@ -19,14 +19,10 @@ namespace cis237assignment3.Tests
             Janitor testJanitor1 = new Janitor("steele", "Janitor", "Blue", true, true, true, true, true);
             string actual = testJanitor1.ToString();
 
-            string expected = "Blue steele Janitor Droid" + Environment.NewLine;
-            expected += " Toolbox = True" + Environment.NewLine;
-            expected += " Computer Connection = True" + Environment.NewLine;
-            expected += " Arm = True" + Environment.NewLine;
-            expected += " Trash Compactor = True" + Environment.NewLine;
-            expected += " Vacum = True";
-            Assert.AreEqual(expected, actual);
-           
+            string expected = "steele,Janitor,Blue,True,True,True,True,True";
+
+            StringAssert.Contains(actual, expected);
+
         }
 
         [TestMethod()]

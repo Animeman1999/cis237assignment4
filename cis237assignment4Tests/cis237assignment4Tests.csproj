@@ -53,6 +53,7 @@
     <Compile Include="AstromechTests.cs" />
     <Compile Include="CSVProcessorTests.cs" />
     <Compile Include="DroidCollectionTests.cs" />
+    <Compile Include="GenericLinkedListTests.cs" />
     <Compile Include="JanitorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProtocolTests.cs" />

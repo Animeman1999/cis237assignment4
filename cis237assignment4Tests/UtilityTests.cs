@@ -17,12 +17,7 @@ namespace cis237assignment3.Tests
             Utility testUtility1 = new Utility("plastic", "Utility", "Red", true, true, true);
             string actual = testUtility1.ToString();
 
-            StringAssert.Contains(actual, "Red");
-            StringAssert.Contains(actual, "plastic");
-            StringAssert.Contains(actual, "Utility");
-            StringAssert.Contains(actual, " Toolbox = True");
-            StringAssert.Contains(actual, " Computer Connection = True");
-            StringAssert.Contains(actual, " Arm = True");
+            StringAssert.Contains(actual, "plastic,Utility,Red,True,True,True");
         }
 
         [TestMethod()]

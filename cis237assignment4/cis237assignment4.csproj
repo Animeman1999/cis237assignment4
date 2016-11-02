@@ -45,8 +45,10 @@
     <Compile Include="CSVProcessor.cs" />
     <Compile Include="Droid.cs" />
     <Compile Include="DroidCollection.cs" />
+    <Compile Include="GenericLinkedList.cs" />
     <Compile Include="IDroid.cs" />
     <Compile Include="IDroidCollection.cs" />
+    <Compile Include="IGenericLinkedList.cs" />
     <Compile Include="Janitor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

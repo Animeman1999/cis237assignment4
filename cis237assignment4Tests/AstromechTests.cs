@@ -17,12 +17,7 @@ namespace cis237assignment3.Tests
             Astromech testAstromech1 = new Astromech("steele", "Astromech", "Blue", true, true, true, true, 10);
             string actual = testAstromech1.ToString();
 
-            string expected = "Blue steele Astromech Droid" + Environment.NewLine;
-            expected += " Toolbox = True" + Environment.NewLine;
-            expected += " Computer Connection = True" + Environment.NewLine;
-            expected += " Arm = True" + Environment.NewLine;
-            expected += " Fire Extinquisher = True" + Environment.NewLine;
-            expected += " Number of Ships = 10";
+            string expected = "steele,Astromech,Blue,True,True,True,True,10";
             Assert.AreEqual(expected, actual);
         }
 
