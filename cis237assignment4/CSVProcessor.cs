@@ -80,7 +80,7 @@ namespace cis237assignment3
 
         public bool ConvertBool(string BoolString)
         {
-            if (BoolString == "true")
+            if (BoolString.ToLower().Trim ()== "true")
             {
                 return true;
             }

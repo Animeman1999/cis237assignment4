@@ -1,8 +1,9 @@
 plastic,Protocol,red,1000
-steele,Utility,white,False,False,False
-Plass-Steele,Janitor,blue,False,False,False,False,False
+steele,Utility,white,False,True,False
 Nevo-Titanium,Astromech,orange,False,False,False,False,10
 Areogel,Protocol,Black,2000
 Atomic-Aluminum,Utility,Teal,False,False,False
 plastic,Janitor,Orange,False,False,False,False,False
 Plass-Steele,Astromech,Purple,True,True,True,False,300
+Plass-Steele,Janitor,Blue,True,True,True,True,True
+steele,Astromech,Aquamarine,True,False,True,False,115

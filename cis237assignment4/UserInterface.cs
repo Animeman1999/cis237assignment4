@@ -22,6 +22,7 @@ namespace cis237assignment3
         bool toolboxBool;
         bool computerConnectionBool;
         bool armBool;
+        CSVProcessor boolConvert = new CSVProcessor();
 
         string[,] _materialList =
                 { { "plastic", ".5" },
@@ -172,7 +173,40 @@ namespace cis237assignment3
             //Takes the OutputString passed in and prints out each item as a seperate line
             for (int i = 0; i < OutputString.Length; i++)
             {
-                Console.WriteLine(OutputString[i]);
+                string[] inputParts = OutputString[i].Split(',');
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write((i +1) + ") " + inputParts[1] + " ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(inputParts[2] + " " + inputParts[0]);
+                string modelString = inputParts[1];
+
+                if (modelString == "Protocol")
+                {
+                    Console.WriteLine("    Number of languages = " + inputParts[3]);
+                    Console.WriteLine(inputParts[4]);
+                }
+                else
+                {
+                    Console.WriteLine("    Toolbox = " + boolConvert.ConvertBool(inputParts[3]));
+                    Console.WriteLine("    Computer Connection = " + boolConvert.ConvertBool(inputParts[4]));
+                    Console.WriteLine("    Arm = " + boolConvert.ConvertBool(inputParts[5]));
+                    switch (modelString)
+                    {
+                        case "Utility":
+                            Console.WriteLine(inputParts[6]);
+                            break;
+                        case "Janitor":
+                            Console.WriteLine("    Trash Compator = " + inputParts[6]);
+                            Console.WriteLine("    Vacuum = " + inputParts[7]);
+                            Console.WriteLine(inputParts[8]);
+                            break;
+                        case "Astromech":
+                            Console.WriteLine("    Fire Extinguisher = " + inputParts[6]);
+                            Console.WriteLine("    Number of Ships = " + inputParts[7]);
+                            Console.WriteLine(inputParts[8]);
+                            break;
+                    }
+                }
                 Console.WriteLine();
             }
             Console.Write("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
@@ -547,7 +581,7 @@ namespace cis237assignment3
         {
             Console.WriteLine();
             Console.WriteLine($"{YesNoQuestion}?");
-            Console.WriteLine("Yes or No");
+            Console.WriteLine("Enter Yes or No.");
             string tempStringInfo = Console.ReadLine();
             Console.WriteLine();
             return tempStringInfo;
@@ -627,6 +661,11 @@ namespace cis237assignment3
             Console.WriteLine("Needs to be more than one droid in the list to sort. Need to add more droids first");
             Console.WriteLine("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
             Console.WriteLine();
+        }
+
+        public bool SaveDroidListMessage()
+        {
+            return BoolInput("The droid list has changed. Do you wish to save it to file before exiting?");
         }
     }
 }

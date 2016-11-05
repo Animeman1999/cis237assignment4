@@ -103,8 +103,12 @@ namespace cis237assignment3
                     default://Exit the program
                         if (arrayHasChanged)
                         {
-                            //csvProcessor.WriteFile(csvFileAndPath, droidCollection);
-                            //Console.WriteLine(csvFileAndPath + " has been saved.");
+                            if (ui.SaveDroidListMessage())
+                            {
+                                csvProcessor.WriteFile(csvFileAndPath, droidCollection);
+                                Console.WriteLine(csvFileAndPath + " has been saved.");
+                            }
+
                         }
                         ui.ExitMessage();
                         break;
