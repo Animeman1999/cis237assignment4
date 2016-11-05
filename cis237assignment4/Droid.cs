@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace cis237assignment3
 {
-    public abstract class Droid : IDroid
+    public abstract class Droid : IDroid , IComparable
     {
         //***************************************
         //Variables
@@ -118,6 +118,16 @@ namespace cis237assignment3
             }
 
             return materialCostDecimal;
+        }
+
+        /// <summary>
+        /// Used to implement Icomparable.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public int CompareTo(object obj)
+        {
+            return TotalCost.CompareTo(obj);
         }
 
 

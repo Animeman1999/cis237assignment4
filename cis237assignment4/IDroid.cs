@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace cis237assignment3
 {//Class created by Dave to force all students to use the CalculateTotalCost method and TotalCost property
-    interface IDroid
+    interface IDroid : IComparable
     {
         void CalculateTotalCost();
 

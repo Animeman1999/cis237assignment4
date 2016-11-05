@@ -610,8 +610,11 @@ namespace cis237assignment3
                     DroidBucketSort droidBucketSort = new DroidBucketSort(droidCollection);
                 break;
                 case 2:
+                    droidCollection.Sort(0, droidCollection.NumberOfDroidsInList - 1);
                     break;
                 case 3:
+                    droidCollection.Sort(0, droidCollection.NumberOfDroidsInList - 1);
+                    droidBucketSort = new DroidBucketSort(droidCollection);
                     break;
                 default:
                     break;
