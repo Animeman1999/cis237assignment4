@@ -16,7 +16,7 @@ namespace cis237assignment4.Tests
         public void PushTest()
         {
             Protocol testProtocol1 = new Protocol("Nevo-Titanium", "Protocol", "Green", 100);
-            Stack<Protocol> testProtocolStac = new Stack<Protocol>();
+            MyStack<Protocol> testProtocolStac = new MyStack<Protocol>();
             testProtocolStac.Push(testProtocol1);
             int testSize = testProtocolStac.Size;
             Protocol testProtocol2 = new Protocol("Nevo-Titanium", "Protocol", "Blue", 200);
@@ -35,7 +35,7 @@ namespace cis237assignment4.Tests
         public void PopTest()
         {
             Protocol testProtocol1 = new Protocol("Nevo-Titanium", "Protocol", "Green", 100);
-            Stack<Protocol> testProtocolStac = new Stack<Protocol>();
+            MyStack<Protocol> testProtocolStac = new MyStack<Protocol>();
             testProtocolStac.Push(testProtocol1);           
             Protocol testProtocol2 = new Protocol("Nevo-Titanium", "Protocol", "Blue", 200);
             testProtocolStac.Push(testProtocol2);

@@ -10,7 +10,7 @@ namespace cis237assignment4
     /// Class to create a Stack
     /// </summary>
     /// <typeparam name="T">Object</typeparam>
-    class Stack<T> : GenericLinkedList<T>
+    class MyStack<T> : GenericLinkedList<T>
     {
        public void Push(T GenericData)
         {
@@ -22,7 +22,7 @@ namespace cis237assignment4
             return base.RemoveFromFront();
         }
 
-        public Stack() : base()
+        public MyStack() : base()
             { }
     }
 }

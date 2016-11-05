@@ -9,10 +9,10 @@ namespace cis237assignment4
 {
     class DroidBucketSort
     {
-        Stack<Protocol> protocolStack = new Stack<Protocol>();
-        Stack<Utility> utilityStack = new Stack<Utility>();
-        Stack<Janitor> janitorStack = new Stack<Janitor>();
-        Stack<Astromech> astromechStack = new Stack<Astromech>();
+        MyStack<Protocol> protocolStack = new MyStack<Protocol>();
+        MyStack<Utility> utilityStack = new MyStack<Utility>();
+        MyStack<Janitor> janitorStack = new MyStack<Janitor>();
+        MyStack<Astromech> astromechStack = new MyStack<Astromech>();
        
 
         public DroidBucketSort(DroidCollection droidCollection)

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using cis237assignment4;
 
 namespace cis237assignment3
 {
@@ -17,6 +18,12 @@ namespace cis237assignment3
         Droid[] droidItemsCollection;
         int droidItemsLengthInt;
         Droid[] aux;
+
+
+        MyStack<Protocol> protocolStack = new MyStack<Protocol>();
+        MyStack<Utility> utilityStack = new MyStack<Utility>();
+        MyStack<Janitor> janitorStack = new MyStack<Janitor>();
+        MyStack<Astromech> astromechStack = new MyStack<Astromech>();
 
         //***************************************
         //Properties
@@ -154,11 +161,79 @@ namespace cis237assignment3
             Merge( low, mid, high);          //Will not get to this step till after the base case has happened and it is walking out of the recursion
         }
 
+
+        public void DroidBucketSort(DroidCollection droidCollection)
+        {
+
+
+            //*************************************************************Place Droids on 4 model stacks************************************************
+            CSVProcessor getBool = new CSVProcessor();
+            for (int index = 0; index < droidCollection.NumberOfDroidsInList; index++)
+            {
+                string ModelString = droidItemsCollection[index].Model;
+               
+                switch (ModelString)
+                {
+                    case "Protocol":
+                        protocolStack.Push((Protocol)droidItemsCollection[index]);
+                        break;
+                    case "Utility":
+                        utilityStack.Push((Utility)droidItemsCollection[index]);
+                        break;
+                    case "Janitor":
+                        janitorStack.Push((Janitor)droidItemsCollection[index]);
+                        break;
+                    default: //Astromech
+                        astromechStack.Push((Astromech)droidItemsCollection[index]);
+                        break;
+                }
+            }
+
+            //**********************************************************End Place Droids on 4 model stacks************************************************
+
+            //**************************************************************Place Droids on Que***********************************************************
+            Que<Droid> droidQue = new Que<Droid>();
+            for (int index = 0; index <= astromechStack.Size; index++)
+            {
+                Droid tempDroid = astromechStack.Pop();
+                droidQue.Enqueue(tempDroid);
+            }
+
+            for (int index = 0; index <= janitorStack.Size; index++)
+            {
+                Droid tempDroid = janitorStack.Pop();
+                droidQue.Enqueue(tempDroid);
+            }
+
+            for (int index = 0; index <= utilityStack.Size; index++)
+            {
+                Droid tempDroid = utilityStack.Pop();
+                droidQue.Enqueue(tempDroid);
+            }
+
+            for (int index = 0; index <= protocolStack.Size; index++)
+            {
+                Droid tempDroid = protocolStack.Pop();
+                droidQue.Enqueue(tempDroid);
+            }
+
+
+            //**********************************************************End Place Droids on Que***********************************************************
+
+            //*******************************************************Place Droids back into Array*********************************************************
+
+            int originalDroidQueSize = droidQue.Size;
+            for (int index = 0; index < originalDroidQueSize; index++)
+            {
+               droidItemsCollection[index] = droidQue.Dequeue();
+            }
+        }
+
         //***************************************
         //Constructor
         //***************************************
 
-            public DroidCollection(int Size)
+        public DroidCollection(int Size)
         {
             droidItemsCollection = new Droid[Size];
             droidItemsLengthInt = 0;

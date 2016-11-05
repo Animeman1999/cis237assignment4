@@ -607,14 +607,14 @@ namespace cis237assignment3
             switch(ChoiceInt)
             {
                 case 1:
-                    DroidBucketSort droidBucketSort = new DroidBucketSort(droidCollection);
+                    droidCollection.DroidBucketSort(droidCollection);
                 break;
                 case 2:
                     droidCollection.Sort(0, droidCollection.NumberOfDroidsInList - 1);
                     break;
                 case 3:
                     droidCollection.Sort(0, droidCollection.NumberOfDroidsInList - 1);
-                    droidBucketSort = new DroidBucketSort(droidCollection);
+                    DroidBucketSort droidBucketSort = new DroidBucketSort(droidCollection);
                     break;
                 default:
                     break;
