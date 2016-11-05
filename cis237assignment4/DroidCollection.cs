@@ -70,8 +70,8 @@ namespace cis237assignment3
                 droidItemsCollection[droidItemsLengthInt - 1] = null;
                 droidItemsLengthInt = droidItemsLengthInt - 1;
             }
-
         }
+
         public string[] GetListOfAllDroids()
         {
             string[] listOfAllDroids = new string[droidItemsLengthInt];

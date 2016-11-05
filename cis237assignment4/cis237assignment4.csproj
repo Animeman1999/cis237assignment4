@@ -44,6 +44,7 @@
     <Compile Include="Astromech.cs" />
     <Compile Include="CSVProcessor.cs" />
     <Compile Include="Droid.cs" />
+    <Compile Include="DroidBucketSort.cs" />
     <Compile Include="DroidCollection.cs" />
     <Compile Include="GenericLinkedList.cs" />
     <Compile Include="IDroid.cs" />

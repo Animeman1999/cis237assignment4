@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;//Needed to maxamize the console
 using System.Runtime.InteropServices;//Needed to maxamize the console
+using cis237assignment4;
 
 namespace cis237assignment3
 {
@@ -32,7 +33,7 @@ namespace cis237assignment3
 
         string[] _droidList = { "Protocol", "Utility", "Janitor", "Astromech" };
 
-        public string [,] MaterialList { get { return _materialList; } }
+        public string[,] MaterialList { get { return _materialList; } }
 
         //****************************************Code to Maxamize the Console***********************
         [DllImport("kernel32.dll", ExactSpelling = true)]
@@ -80,7 +81,7 @@ namespace cis237assignment3
             Console.WriteLine("1) Load Droid list");
             Console.WriteLine("2) Continue without loading Droid list");
             Console.WriteLine("3) Exit");
-            Console.WriteLine("Press number of item you wish to do.");
+            Console.WriteLine("Enter number of item you wish to do.");
 
             return Console.ReadLine();
         }
@@ -132,8 +133,9 @@ namespace cis237assignment3
             Console.WriteLine("1) Print Droid list");
             Console.WriteLine("2) Add Droid to list");
             Console.WriteLine("3) Delete Droid from list");
-            Console.WriteLine("4) Exit");
-            Console.WriteLine("Press number of item you wish to do.");
+            Console.WriteLine("4) Sort the Droids in the List");
+            Console.WriteLine("5) Exit");
+            Console.WriteLine("Enter number of item you wish to do.");
             return Console.ReadLine();
         }
 
@@ -147,7 +149,7 @@ namespace cis237assignment3
             Console.WriteLine();
 
             //Continue getting user input until the user enters valid input
-            while (inputString.Trim() != "1" && inputString.Trim() != "2" && inputString.Trim() != "3" && inputString.Trim() != "4")
+            while (inputString.Trim() != "1" && inputString.Trim() != "2" && inputString.Trim() != "3" && inputString.Trim() != "4" && inputString.Trim() != "5")
             {
                 ErrorMessage();
                 inputString = MainMenuMessage();
@@ -377,7 +379,7 @@ namespace cis237assignment3
                 {
                     Console.WriteLine($"{index + 1}) {_materialList[index, 0]} - cost mulitpler is: {_materialList[index, 1]}");
                 }
-                Console.Write("Press the number of the material you wish the droid made from: ");
+                Console.Write("Enter the number of the material you wish the droid made from: ");
                 Console.ForegroundColor = ConsoleColor.White;
             }
             //Gets the users input
@@ -567,6 +569,61 @@ namespace cis237assignment3
             Console.WriteLine("Exiting the Jawas of Tatooine Droids Sales List Program");
             Console.Write("Press Enter to exit. . .");
             Console.ReadLine();
+        }
+
+        private String SortMenuMessage()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            Console.Write("- Sort Menu -");
+            Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("1) Sort Droids by model");
+            Console.WriteLine("2) Sort Droids by cost");
+            Console.WriteLine("3) Sort Droids by model and cost");
+            Console.WriteLine("4) Exit");
+            Console.WriteLine("Enter number of item you wish to do.");
+            return Console.ReadLine();
+        }
+
+        public int SortMenu()
+        {
+            string inputString = SortMenuMessage();
+            Console.WriteLine();
+
+            //Continue getting user input until the user enters valid input
+            while (inputString.Trim() != "1" && inputString.Trim() != "2" && inputString.Trim() != "3" && inputString.Trim() != "4")
+            {
+                ErrorMessage();
+                inputString = SortMenuMessage();
+                Console.WriteLine();
+            }
+            return int.Parse(inputString.Trim());
+        }
+
+        public void SortChoice(int ChoiceInt, DroidCollection droidCollection)
+        {
+            switch(ChoiceInt)
+            {
+                case 1:
+                    DroidBucketSort droidBucketSort = new DroidBucketSort(droidCollection);
+                break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                default:
+                    break;
+            }    
+        }
+
+        public void SortNoteEnoughMessage()
+        {
+            Console.WriteLine("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+            Console.WriteLine("Needs to be more than one droid in the list to sort. Need to add more droids first");
+            Console.WriteLine("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+            Console.WriteLine();
         }
     }
 }

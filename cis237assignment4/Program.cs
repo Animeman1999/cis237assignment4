@@ -25,10 +25,10 @@ namespace cis237assignment3
             //testUI.PrintDroidList(testDroidCollection.GetListOfAllDroids());
             //Console.ReadLine();
 
-            string materialTest = "plastic";
-            string DroidTypeTest = "Protocol";
-            string colorTest = "red";
-            int numberLanguagesTest = 1000;
+            //string materialTest = "plastic";
+            //string DroidTypeTest = "Protocol";
+            //string colorTest = "red";
+            //int numberLanguagesTest = 1000;
             bool arrayHasChanged = false;
             int menuChoice;
             const int DROID_COLLECTION_SIZE = 1000;
@@ -63,7 +63,7 @@ namespace cis237assignment3
             }
 
             //Continue to loop until the user chooses 4 which is to exit.
-            while (menuChoice != 4)
+            while (menuChoice != 5)
             {
                 menuChoice = ui.MainMenu();
                 switch (menuChoice)
@@ -87,13 +87,24 @@ namespace cis237assignment3
                         {
                             ui.NoDroidsInListMessage();
                         }
-
+                        break;
+                    case 4:
+                        if (droidCollection.NumberOfDroidsInList < 2)
+                        {
+                            ui.SortNoteEnoughMessage();
+                        }
+                        else
+                        {
+                            int sortChoice = ui.SortMenu();
+                            ui.SortChoice(sortChoice, droidCollection);
+                        }
+                        
                         break;
                     default://Exit the program
                         if (arrayHasChanged)
                         {
-                            csvProcessor.WriteFile(csvFileAndPath, droidCollection);
-                            Console.WriteLine(csvFileAndPath + " has been saved.");
+                            //csvProcessor.WriteFile(csvFileAndPath, droidCollection);
+                            //Console.WriteLine(csvFileAndPath + " has been saved.");
                         }
                         ui.ExitMessage();
                         break;

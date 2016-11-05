@@ -13,7 +13,7 @@ namespace cis237assignment4.Tests
     {
         
         [TestMethod()]
-        public void MergeTest()
+        public void MergeAndSortTest()
         {
             IComparable[] testInt1 = { 5, 2, 7, 9, 4, 3 };
             IComparable[] expectedInt1 = { 2, 3, 4, 5, 7, 9 };
