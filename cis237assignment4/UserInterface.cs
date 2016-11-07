@@ -10,7 +10,7 @@ using System.Diagnostics;//Needed to maxamize the console
 using System.Runtime.InteropServices;//Needed to maxamize the console
 using cis237assignment4;
 
-namespace cis237assignment3
+namespace cis237assignment4
 {
     public class UserInterface
     {
@@ -636,18 +636,20 @@ namespace cis237assignment3
             return int.Parse(inputString.Trim());
         }
 
-        public void SortChoice(int ChoiceInt, DroidCollection droidCollection)
+        public void SortChoice(int ChoiceInt, DroidCollection droidCollection, int droidCollectionSize)
         {
-            switch(ChoiceInt)
+
+            switch (ChoiceInt)
             {
+
                 case 1:
                     droidCollection.DroidBucketSort(droidCollection);
                 break;
                 case 2:
-                    droidCollection.Sort(0, droidCollection.NumberOfDroidsInList - 1);
+                    droidCollection.StartSort(droidCollection, droidCollectionSize);
                     break;
                 case 3:
-                    droidCollection.Sort(0, droidCollection.NumberOfDroidsInList - 1);
+                    droidCollection.StartSort(droidCollection, droidCollectionSize);
                     DroidBucketSort droidBucketSort = new DroidBucketSort(droidCollection);
                     break;
                 default:

@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cis237assignment3
+namespace cis237assignment4
 {
-    public abstract class Droid : IDroid , IComparable
+    public abstract class Droid : IDroid
     {
         //***************************************
         //Variables
@@ -127,7 +127,10 @@ namespace cis237assignment3
         /// <returns></returns>
         public int CompareTo(object obj)
         {
-            return TotalCost.CompareTo(obj);
+            Droid passedInDroid = (Droid)obj;
+            decimal thisTotalCost = this._totalCostDecimal;
+            decimal passedInTotalCoste = passedInDroid._totalCostDecimal;
+            return thisTotalCost.CompareTo(passedInTotalCoste);
         }
 
 

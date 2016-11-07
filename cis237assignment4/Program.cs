@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cis237assignment3
+namespace cis237assignment4
 {
     public class Program
     {
@@ -96,7 +96,7 @@ namespace cis237assignment3
                         else
                         {
                             int sortChoice = ui.SortMenu();
-                            ui.SortChoice(sortChoice, droidCollection);
+                            ui.SortChoice(sortChoice, droidCollection, DROID_COLLECTION_SIZE);
                         }
                         
                         break;

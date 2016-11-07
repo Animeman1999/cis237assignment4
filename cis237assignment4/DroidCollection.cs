@@ -8,16 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using cis237assignment4;
 
-namespace cis237assignment3
+namespace cis237assignment4
 {
     public class DroidCollection : IDroidCollection
     {
         //***************************************
         //Variables
         //***************************************
-        Droid[] droidItemsCollection;
+        IDroid[] droidItemsCollection;
         int droidItemsLengthInt;
-        Droid[] aux;
+        IDroid[] comparableDroidCollection;
+        IDroid[] aux;
 
 
         MyStack<Protocol> protocolStack = new MyStack<Protocol>();
@@ -106,7 +107,7 @@ namespace cis237assignment3
         }
 
                     
-        public void Merge( int low, int mid, int high)
+        public void Merge(IComparable[] compareableCoellction, int low, int mid, int high)
         {
             int lowInt = low;              //start index for first half of the array
             int MidPlus = mid + 1;           //Start index for second half of the array
@@ -114,7 +115,9 @@ namespace cis237assignment3
 
             for (int inidex = low; inidex <= high; inidex++)  //Copy array
             {
-                aux[inidex] = droidItemsCollection[inidex];
+                //Console.WriteLine(compareableCoellction[inidex].ToString());
+                aux[inidex] = (Droid)compareableCoellction[inidex];
+
 
             }
             for (int index = low; index <= high; index++)
@@ -122,29 +125,37 @@ namespace cis237assignment3
 
                 if (lowInt > mid)  //If past end
                 {
-                    droidItemsCollection[index] = aux[MidPlus++];
+                    compareableCoellction[index] = aux[MidPlus++];
                 }
-                else if (MidPlus > high) //If past end
-                {
-                    droidItemsCollection[index] = aux[lowInt++];
-                }
-
                 else
                 {
-                    int compareInt = aux[MidPlus].TotalCost.CompareTo(aux[lowInt].TotalCost);
-                    if (compareInt < 0)
+                    if (MidPlus > high) //If past end
                     {
-                        droidItemsCollection[index] = aux[MidPlus++];
+                        compareableCoellction[index] = aux[lowInt++];
                     }
+
                     else
                     {
-                        droidItemsCollection[index] = aux[lowInt++];
+                        Console.WriteLine("Compare about to happen; Midplus = " + MidPlus + " lowInt = " + lowInt);
+                        Console.WriteLine(aux[MidPlus].ToString());
+                        Console.WriteLine(aux[lowInt].ToString());
+                        Console.ReadLine();
+                        int compareInt = aux[MidPlus].CompareTo(aux[lowInt]);
+                        Console.WriteLine("compareInt = " + compareInt);
+                        if (compareInt < 0)
+                        {
+                            compareableCoellction[index] = aux[MidPlus++];
+                        }
+                        else
+                        {
+                            compareableCoellction[index] = aux[lowInt++];
+                        }
                     }
                 }
             }
         }
 
-        public void Sort( int low, int high)
+        public void Sort(IComparable[] compareableColelction, int low, int high)
         {
 
             if (high <= low) //Base Case - this is when you are down to the one element base arrary
@@ -153,11 +164,29 @@ namespace cis237assignment3
             }
             int mid = low + (high - low) / 2;  //Get the mid point of the array(split the array in half)
 
-            Sort( low, mid);           // Left half split
+            Sort(compareableColelction, low, mid);           // Left half split
 
-            Sort( mid + 1, high);        //Right half split
+            Sort(compareableColelction, mid + 1, high);        //Right half split
 
-            Merge( low, mid, high);          //Will not get to this step till after the base case has happened and it is walking out of the recursion
+            Merge(compareableColelction, low, mid, high);          //Will not get to this step till after the base case has happened and it is walking out of the recursion
+        }
+
+        public void StartSort(DroidCollection droidCollection, int droidCollectionSize)
+        {
+            comparableDroidCollection = new Droid[droidCollectionSize];
+
+            for(int index = 0; index < droidCollection.NumberOfDroidsInList; index++)
+            {Console.WriteLine(index + " " + droidCollection.ToString());
+                comparableDroidCollection[index] = droidItemsCollection[index];
+            }
+
+            Sort(comparableDroidCollection, 0, droidCollection.NumberOfDroidsInList - 1);
+
+            for (int index = 0; index < droidCollection.NumberOfDroidsInList; index++)
+            {
+                Console.WriteLine(index + " " + droidCollection.ToString());
+                droidItemsCollection[index] = comparableDroidCollection[index];
+            }
         }
 
 
