@@ -85,11 +85,11 @@ Be sure to think about what the time complexity for the bucket sort will be. Thi
 
 ## Outside Resources Used
 
-None
+None - I examined about 20 websites inorder to try and figure out how to use DroidCollectoin directly as the IComparabe Array. None of them helped me solve the issue so they were not listed. In the endy I simply went though each droid in DroidCollection and put it into an IComparabe array and then passed it into the merge sort.  I found this issue frustrating for it seems that there should be a way to use DroidCollection directly.
 
 ## Known Problems, Issues, And/Or Errors in the Program
 
-None
+None - Note that I did the BucketSort in two different ways. The internal one to the DroidCollection is much more elegant. When you go to use the sort, the User Interface lets you know which one is being used.
 
 ## Assignment 3 Description for reference
 
