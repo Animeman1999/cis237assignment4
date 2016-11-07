@@ -9,6 +9,11 @@ namespace cis237assignment4
 {
     class CSVProcessor
     {
+        /// <summary>
+        /// This opens the Droids saved into a csv file and reads in each line populating the DroidCollection
+        /// </summary>
+        /// <param name="csvFilePath">string</param>
+        /// <param name="droidCollection">DroidCollection</param>
         public void ReadFile(string csvFilePath, DroidCollection droidCollection)
         {
             StreamReader streamReader = null;
@@ -23,7 +28,8 @@ namespace cis237assignment4
 
                 while ((inputString = streamReader.ReadLine()) != null)
                 {
-                    processRecord(inputString, droidCollection, counter++);
+                    processRecord(inputString, droidCollection);
+                    counter++;
                 }
 
             }
@@ -44,6 +50,11 @@ namespace cis237assignment4
             }
         }
 
+        /// <summary>
+        /// This writes the Droids in the DroidCollection into a CSV file that holds the droids
+        /// </summary>
+        /// <param name="csvFilePath">string</param>
+        /// <param name="droidCollection">DroidCollection</param>
         public void WriteFile(string csvFilePath, DroidCollection droidCollection)
         {
             StreamWriter streamWriter = null;
@@ -78,6 +89,11 @@ namespace cis237assignment4
             }
         }
 
+        /// <summary>
+        /// Used to convert a string value into a bool
+        /// </summary>
+        /// <param name="BoolString"></param>
+        /// <returns>bool</returns>
         public bool ConvertBool(string BoolString)
         {
             if (BoolString.ToLower().Trim ()== "true")
@@ -90,24 +106,32 @@ namespace cis237assignment4
             }
         }
 
-        public void processRecord(string inputString, DroidCollection droidCollection, int index)
-        {// Internal method used for tacking a single record from the CSV file and placing into the array
+        /// <summary>
+        /// method used for tacking a single record from the CSV file and adding each droid into the DroidCollectoin
+        /// </summary>
+        /// <param name="inputString">string</param>
+        /// <param name="droidCollection">DroidCollectin</param>
+        public void processRecord(string inputString, DroidCollection droidCollection)
+        {
+            //Take the inputString and split it by a comma into an a string array
             string[] inputParts = inputString.Split(',');
 
             string materialString = inputParts[0];
             string modelString = inputParts[1];
             string colorString = inputParts[2];
 
-            if (modelString == "Protocol")
+            if (modelString == "Protocol") //Protocol is not done in switch/case since it's parameters are not based on the Utility droid
             {
                 int numberLanguagesInt = Int32.Parse(inputParts[3]);
                 droidCollection.AddNewItem(materialString, modelString, colorString, numberLanguagesInt);
             }
             else
             {
+                //The next 3 bools are used for all the droids in the switch/case
                 bool toolboxBool = ConvertBool(inputParts[3]);
                 bool computerConnectionBool = ConvertBool(inputParts[4]);
                 bool armBool = ConvertBool(inputParts[5]);
+                
                 switch (modelString)
                 {
                     case "Utility":

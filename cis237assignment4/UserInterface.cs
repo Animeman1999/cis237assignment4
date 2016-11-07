@@ -613,11 +613,9 @@ namespace cis237assignment4
             Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("1) Sort Droids by model            -NOTE THIS CALLS THE BUCKET SORT IN DroidCollection.cs PER SPECIFICATIONS");
+            Console.WriteLine("1) Sort Droids by model            -NOTE THIS CALLS THE BUCKET SORT INTERNALLY DroidCollection.cs");
             Console.WriteLine("2) Sort Droids by cost ");
-            Console.WriteLine("3) Sort Droids by model and cost   -NOTE THIS CALLS DroidBuckeStort.cs TO HANDLE THE BUCKET SORT. THIS");
-            Console.WriteLine("                                    IS AN EXTRA DONE TO SEE HOW THE SORT COULD BE HANDLED IF I COULD NOT");
-            Console.WriteLine("                                    ACCESS DroidCollection.cs INTERNALLY");
+            Console.WriteLine("3) Sort Droids by model and cost   -NOTE THIS CALLS DroidBuckeStort.cs TO HANDLE THE BUCKET SORT EXTERNALLY FROM DroidCollection.");
             Console.WriteLine("4) Exit");
             Console.WriteLine("Enter number of item you wish to do.");
             return Console.ReadLine();
