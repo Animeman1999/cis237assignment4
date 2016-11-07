@@ -111,12 +111,10 @@ namespace cis237assignment4
         {
             int lowInt = low;              //start index for first half of the array
             int MidPlus = mid + 1;           //Start index for second half of the array
-
-            Console.WriteLine("Buliding aux array");
+            
             for (int inidex = low; inidex <= high; inidex++)  //Copy array
             {
                 aux[inidex] = (Droid)compareableCoellction[inidex];
-                Console.WriteLine("index is " + inidex + " aux[inidex] is " + aux[inidex].ToString());
 
 
             }
@@ -136,7 +134,6 @@ namespace cis237assignment4
 
                     else
                     {
-                        Console.WriteLine("index is " + index + " aux[MidPlus] is " + aux[MidPlus].ToString() + " (aux[lowInt] is " + aux[lowInt].ToString());
                         int compareInt = aux[MidPlus].CompareTo(aux[lowInt]);
                         if (compareInt < 0)
                         {
@@ -181,7 +178,6 @@ namespace cis237assignment4
             for (int index = 0; index < droidCollection.NumberOfDroidsInList; index++)
             {
                 droidItemsCollection[index] = comparableDroidCollection[index];
-                Console.WriteLine(droidItemsCollection[index].TotalCost);
             }
         }
 
@@ -255,7 +251,6 @@ namespace cis237assignment4
             {
                 
                 droidItemsCollection[index] = droidQue.Dequeue();
-                Console.WriteLine(index + " " + droidItemsCollection[index].ToString());
             }
         }
 

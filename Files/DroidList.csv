@@ -7,3 +7,6 @@ plastic,Janitor,Orange,False,False,False,False,False
 Plass-Steele,Astromech,Purple,True,True,True,False,300
 Plass-Steele,Janitor,Blue,True,True,True,True,True
 steele,Astromech,Aquamarine,True,False,True,False,115
+Plass-Steele,Utility,Beige,True,True,True
+plastic,Janitor,Bright Green,False,False,True,True,True
+Nevo-Titanium,Protocol,Cherry,6000

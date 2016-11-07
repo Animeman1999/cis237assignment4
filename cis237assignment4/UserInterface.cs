@@ -613,9 +613,11 @@ namespace cis237assignment4
             Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("1) Sort Droids by model");
-            Console.WriteLine("2) Sort Droids by cost");
-            Console.WriteLine("3) Sort Droids by model and cost");
+            Console.WriteLine("1) Sort Droids by model            -NOTE THIS CALLS THE BUCKET SORT IN DroidCollection.cs PER SPECIFICATIONS");
+            Console.WriteLine("2) Sort Droids by cost ");
+            Console.WriteLine("3) Sort Droids by model and cost   -NOTE THIS CALLS DroidBuckeStort.cs TO HANDLE THE BUCKET SORT. THIS");
+            Console.WriteLine("                                    IS AN EXTRA DONE TO SEE HOW THE SORT COULD BE HANDLED IF I COULD NOT");
+            Console.WriteLine("                                    ACCESS DroidCollection.cs INTERNALLY");
             Console.WriteLine("4) Exit");
             Console.WriteLine("Enter number of item you wish to do.");
             return Console.ReadLine();
@@ -643,14 +645,14 @@ namespace cis237assignment4
             {
 
                 case 1:
-                    Console.WriteLine(" line 646 Number of droids in Collection " + droidCollection.NumberOfDroidsInList);
                     droidCollection.DroidBucketSort(droidCollection);
                 break;
                 case 2:
-                    Console.WriteLine(" line 646 Number of droids in Collection " + droidCollection.NumberOfDroidsInList);
+                    droidCollection.GetListOfAllDroids();
                     droidCollection.StartSort(droidCollection, droidCollectionSize);
                     break;
                 case 3:
+                    droidCollection.GetListOfAllDroids();
                     droidCollection.StartSort(droidCollection, droidCollectionSize);
                     DroidBucketSort droidBucketSort = new DroidBucketSort(droidCollection);
                     break;

@@ -61,25 +61,29 @@ namespace cis237assignment4
 
             //**************************************************************Place Droids on Que***********************************************************
             Que<Droid> droidQue = new Que<Droid>();
-            for (int index = 0; index <= astromechStack.Size; index++)
+            int stackSize = astromechStack.Size;
+            for (int index = 0; index < stackSize;  index++)
             {
                 Droid tempDroid = astromechStack.Pop();
                 droidQue.Enqueue(tempDroid);
             }
 
-            for (int index = 0; index <= janitorStack.Size; index++)
+            stackSize = janitorStack.Size;
+            for (int index = 0; index < stackSize; index++)
             {
                 Droid tempDroid = janitorStack.Pop();
                 droidQue.Enqueue(tempDroid);
             }
 
-            for (int index = 0; index <= utilityStack.Size; index++)
+            stackSize = utilityStack.Size;
+            for (int index = 0; index < stackSize; index++)
             {
                 Droid tempDroid = utilityStack.Pop();
                 droidQue.Enqueue(tempDroid);
             }
 
-            for (int index = 0; index <= protocolStack.Size; index++)
+            stackSize = protocolStack.Size;
+            for (int index = 0; index < stackSize; index++)
             {
                 Droid tempDroid = protocolStack.Pop();
                 droidQue.Enqueue(tempDroid);
