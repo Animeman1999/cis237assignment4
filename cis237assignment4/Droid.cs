@@ -121,10 +121,10 @@ namespace cis237assignment4
         }
 
         /// <summary>
-        /// Used to implement Icomparable.
+        /// Used to implement Icomparable on Droid.cs children.
         /// </summary>
         /// <param name="obj"></param>
-        /// <returns></returns>
+        /// <returns>0,1,-1</returns>
         public int CompareTo(object obj)
         {
             Droid passedInDroid = (Droid)obj;
