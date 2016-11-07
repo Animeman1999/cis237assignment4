@@ -17,7 +17,7 @@ namespace cis237assignment4
         //***************************************
         IDroid[] droidItemsCollection;
         int droidItemsLengthInt;
-        IDroid[] comparableDroidCollection;
+        IDroid[] comparableDroidCollection = new Droid[1000];
         IDroid[] aux;
 
 
@@ -112,11 +112,11 @@ namespace cis237assignment4
             int lowInt = low;              //start index for first half of the array
             int MidPlus = mid + 1;           //Start index for second half of the array
 
-
+            Console.WriteLine("Buliding aux array");
             for (int inidex = low; inidex <= high; inidex++)  //Copy array
             {
-                //Console.WriteLine(compareableCoellction[inidex].ToString());
                 aux[inidex] = (Droid)compareableCoellction[inidex];
+                Console.WriteLine("index is " + inidex + " aux[inidex] is " + aux[inidex].ToString());
 
 
             }
@@ -136,12 +136,8 @@ namespace cis237assignment4
 
                     else
                     {
-                        Console.WriteLine("Compare about to happen; Midplus = " + MidPlus + " lowInt = " + lowInt);
-                        Console.WriteLine(aux[MidPlus].ToString());
-                        Console.WriteLine(aux[lowInt].ToString());
-                        Console.ReadLine();
+                        Console.WriteLine("index is " + index + " aux[MidPlus] is " + aux[MidPlus].ToString() + " (aux[lowInt] is " + aux[lowInt].ToString());
                         int compareInt = aux[MidPlus].CompareTo(aux[lowInt]);
-                        Console.WriteLine("compareInt = " + compareInt);
                         if (compareInt < 0)
                         {
                             compareableCoellction[index] = aux[MidPlus++];
@@ -173,10 +169,10 @@ namespace cis237assignment4
 
         public void StartSort(DroidCollection droidCollection, int droidCollectionSize)
         {
-            comparableDroidCollection = new Droid[droidCollectionSize];
+            //comparableDroidCollection = new Droid[droidCollectionSize];
 
             for(int index = 0; index < droidCollection.NumberOfDroidsInList; index++)
-            {Console.WriteLine(index + " " + droidCollection.ToString());
+            {
                 comparableDroidCollection[index] = droidItemsCollection[index];
             }
 
@@ -184,8 +180,8 @@ namespace cis237assignment4
 
             for (int index = 0; index < droidCollection.NumberOfDroidsInList; index++)
             {
-                Console.WriteLine(index + " " + droidCollection.ToString());
                 droidItemsCollection[index] = comparableDroidCollection[index];
+                Console.WriteLine(droidItemsCollection[index].TotalCost);
             }
         }
 
@@ -221,25 +217,29 @@ namespace cis237assignment4
 
             //**************************************************************Place Droids on Que***********************************************************
             Que<Droid> droidQue = new Que<Droid>();
-            for (int index = 0; index <= astromechStack.Size; index++)
+            int astromechSize = astromechStack.Size -1;
+            for (int index = 0; index <= astromechSize; index++)
             {
                 Droid tempDroid = astromechStack.Pop();
                 droidQue.Enqueue(tempDroid);
             }
 
-            for (int index = 0; index <= janitorStack.Size; index++)
+            int janitorSize =  janitorStack.Size -1;
+            for (int index = 0; index <= janitorSize; index++)
             {
                 Droid tempDroid = janitorStack.Pop();
                 droidQue.Enqueue(tempDroid);
             }
 
-            for (int index = 0; index <= utilityStack.Size; index++)
+            int utilitySize = utilityStack.Size -1;
+            for (int index = 0; index <= utilitySize; index++)
             {
                 Droid tempDroid = utilityStack.Pop();
                 droidQue.Enqueue(tempDroid);
             }
 
-            for (int index = 0; index <= protocolStack.Size; index++)
+            int protocolSize = protocolStack.Size -1;
+            for (int index = 0; index <= protocolSize; index++)
             {
                 Droid tempDroid = protocolStack.Pop();
                 droidQue.Enqueue(tempDroid);
@@ -253,7 +253,9 @@ namespace cis237assignment4
             int originalDroidQueSize = droidQue.Size;
             for (int index = 0; index < originalDroidQueSize; index++)
             {
-               droidItemsCollection[index] = droidQue.Dequeue();
+                
+                droidItemsCollection[index] = droidQue.Dequeue();
+                Console.WriteLine(index + " " + droidItemsCollection[index].ToString());
             }
         }
 

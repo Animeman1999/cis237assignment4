@@ -643,9 +643,11 @@ namespace cis237assignment4
             {
 
                 case 1:
+                    Console.WriteLine(" line 646 Number of droids in Collection " + droidCollection.NumberOfDroidsInList);
                     droidCollection.DroidBucketSort(droidCollection);
                 break;
                 case 2:
+                    Console.WriteLine(" line 646 Number of droids in Collection " + droidCollection.NumberOfDroidsInList);
                     droidCollection.StartSort(droidCollection, droidCollectionSize);
                     break;
                 case 3:
