@@ -8,7 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace cis237assignment4
-{
+{   
+    /// <summary>
+    /// Defines a Janitor
+    /// </summary>
     class Janitor : Utility
     {
         //***************************************

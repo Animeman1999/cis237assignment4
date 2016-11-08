@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace cis237assignment4
 {
+    /// <summary>
+    /// Defines a Utility Droid
+    /// </summary>
     class Utility : Droid
     {
         //***************************************

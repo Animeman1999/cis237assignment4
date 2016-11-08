@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
+/// <summary>
+/// Defines a Protocol Droid
+/// </summary>
 namespace cis237assignment4
 {
     class Protocol : Droid
