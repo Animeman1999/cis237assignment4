@@ -179,7 +179,9 @@ namespace cis237assignment4
             //Return the Data inside of the old tail.
             return returnData;
         }
-
+        /// <summary>
+        /// Initailize a GenericLinkedList
+        /// </summary>
         public GenericLinkedList()
         {
             _head = null;
