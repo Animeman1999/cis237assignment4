@@ -11,7 +11,10 @@ using System.Runtime.InteropServices;//Needed to maxamize the console
 using cis237assignment4;
 
 namespace cis237assignment4
-{
+{   
+    /// <summary>
+    /// Class to handle user input and outpout and logic needed to accomplish this
+    /// </summary>
     public class UserInterface
     {
         //***************************************
@@ -514,10 +517,15 @@ namespace cis237assignment4
             }
             return numbLangInt;
         }
-
+        /// <summary>
+        /// Generic method to get a string from the user
+        /// </summary>
+        /// <param name="QuestionString">string</param>
+        /// <returns>string</returns>
         public string GetNumberInput(string QuestionString)
         {
             Console.WriteLine();
+            //Write the question to ask the user
             Console.Write(QuestionString + " ");
             //Get the users input
             string inputString = Console.ReadLine();
@@ -604,7 +612,10 @@ namespace cis237assignment4
             Console.Write("Press Enter to exit. . .");
             Console.ReadLine();
         }
-
+        /// <summary>
+        /// Message to display to user when getting the choice for type of sort they wish to do.
+        /// </summary>
+        /// <returns>string</returns>
         private String SortMenuMessage()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -621,6 +632,10 @@ namespace cis237assignment4
             return Console.ReadLine();
         }
 
+        /// <summary>
+        /// Logic to validate input from the user with the SortMenu
+        /// </summary>
+        /// <returns></returns>
         public int SortMenu()
         {
             string inputString = SortMenuMessage();
@@ -636,19 +651,27 @@ namespace cis237assignment4
             return int.Parse(inputString.Trim());
         }
 
+        /// <summary>
+        /// Process the users choice by doing the appropirate sort
+        /// </summary>
+        /// <param name="ChoiceInt">int</param>
+        /// <param name="droidCollection">int</param>
+        /// <param name="droidCollectionSize">int</param>
         public void SortChoice(int ChoiceInt, DroidCollection droidCollection, int droidCollectionSize)
         {
 
             switch (ChoiceInt)
             {
-
+                //Do the bucket sort (internal to droidCollection)
                 case 1:
                     droidCollection.DroidBucketSort(droidCollection);
                 break;
+                    //Do a merge sort
                 case 2:
                     droidCollection.GetListOfAllDroids();
                     droidCollection.StartSort(droidCollection, droidCollectionSize);
                     break;
+                    //Do a merge sort then a bucket sort (external to DroidCollection)
                 case 3:
                     droidCollection.GetListOfAllDroids();
                     droidCollection.StartSort(droidCollection, droidCollectionSize);
@@ -659,6 +682,9 @@ namespace cis237assignment4
             }    
         }
 
+        /// <summary>
+        /// Message when there are not enough droids in the collection to sort
+        /// </summary>
         public void SortNoteEnoughMessage()
         {
             Console.WriteLine("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
@@ -667,6 +693,10 @@ namespace cis237assignment4
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// Check with user if they want to save the changed DroidCollection
+        /// </summary>
+        /// <returns>bool</returns>
         public bool SaveDroidListMessage()
         {
             return BoolInput("The droid list has changed. Do you wish to save it to file before exiting?");
