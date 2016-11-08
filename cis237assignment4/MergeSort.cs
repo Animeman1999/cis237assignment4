@@ -11,7 +11,7 @@ namespace cis237assignment4
     /// </summary>
     class MergeSort
     {
-        IDroid[] aux;
+        IComparable[] aux;
         /// <summary>
         /// Merges the sorted array for a merge sort
         /// </summary>
@@ -26,7 +26,7 @@ namespace cis237assignment4
 
             for (int inidex = low; inidex <= high; inidex++)  //Copy array
             {
-                aux[inidex] = (Droid)compareableCoellction[inidex];
+                aux[inidex] = compareableCoellction[inidex];
 
 
             }
@@ -85,7 +85,7 @@ namespace cis237assignment4
 
         public MergeSort(int Size)
         {
-            aux = new Droid[Size];
+            aux = new IComparable[Size];
         }
     }
 }
