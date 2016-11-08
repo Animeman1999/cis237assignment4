@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace cis237assignment4
-{
+{// I created this as a test to seed how to implement a Bucket Sort if I did not have internal access to DroidCollection. 
+    //While it is possible it certainly uses a lot more code, thus likely to be harder to maintain.
     /// <summary>
     /// Used to implement the bucket sorce externally from the DroidCollection.
     /// </summary>
