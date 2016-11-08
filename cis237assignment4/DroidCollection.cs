@@ -17,7 +17,6 @@ namespace cis237assignment4
         //***************************************
         IDroid[] droidItemsCollection;
         int droidItemsLengthInt;
-        IDroid[] comparableDroidCollection = new Droid[1000];
         IDroid[] aux;
 
 
@@ -133,7 +132,7 @@ namespace cis237assignment4
                     }
 
                     else
-                    {
+                    {//This is where Icomparable is used to make this class generic.
                         int compareInt = aux[MidPlus].CompareTo(aux[lowInt]);
                         if (compareInt < 0)
                         {
@@ -166,19 +165,7 @@ namespace cis237assignment4
 
         public void StartSort(DroidCollection droidCollection, int droidCollectionSize)
         {
-            //comparableDroidCollection = new Droid[droidCollectionSize];
-
-            for(int index = 0; index < droidCollection.NumberOfDroidsInList; index++)
-            {
-                comparableDroidCollection[index] = droidItemsCollection[index];
-            }
-
-            Sort(comparableDroidCollection, 0, droidCollection.NumberOfDroidsInList - 1);
-
-            for (int index = 0; index < droidCollection.NumberOfDroidsInList; index++)
-            {
-                droidItemsCollection[index] = comparableDroidCollection[index];
-            }
+            Sort(droidItemsCollection, 0, droidItemsLengthInt - 1);
         }
 
 
