@@ -17,18 +17,6 @@ namespace cis237assignment4
             //Variables
             //***************************************
 
-            //UserInterface testUI = new UserInterface();
-            //CSVProcessor TestcsvProcessor = new CSVProcessor();
-            //DroidCollection testDroidCollection = new DroidCollection(10);
-            //TestcsvProcessor.ReadFile("4DroidModelTest.csv", testDroidCollection);
-            //Console.WriteLine("Result = " + testDroidCollection.NumberOfDroidsInList);
-            //testUI.PrintDroidList(testDroidCollection.GetListOfAllDroids());
-            //Console.ReadLine();
-
-            //string materialTest = "plastic";
-            //string DroidTypeTest = "Protocol";
-            //string colorTest = "red";
-            //int numberLanguagesTest = 1000;
             bool arrayHasChanged = false;
             int menuChoice;
             const int DROID_COLLECTION_SIZE = 1000;
@@ -88,14 +76,17 @@ namespace cis237assignment4
                             ui.NoDroidsInListMessage();
                         }
                         break;
-                    case 4:
+                    case 4:  //User wants to sort the droid list
+                        //If not at least 2 droid can not sort.
                         if (droidCollection.NumberOfDroidsInList < 2)
                         {
                             ui.SortNoteEnoughMessage();
                         }
                         else
                         {
+                            //Find out which type of sort the user wants to do
                             int sortChoice = ui.SortMenu();
+                            //Do the sort the user wants to do
                             ui.SortChoice(sortChoice, droidCollection, DROID_COLLECTION_SIZE);
                         }
                         
@@ -103,12 +94,13 @@ namespace cis237assignment4
                     default://Exit the program
                         if (arrayHasChanged)
                         {
+                            //Check if droid collectioin has changed
                             if (ui.SaveDroidListMessage())
                             {
+                                //Ask user if they wish to save the droid collection
                                 csvProcessor.WriteFile(csvFileAndPath, droidCollection);
                                 Console.WriteLine(csvFileAndPath + " has been saved.");
                             }
-
                         }
                         ui.ExitMessage();
                         break;
