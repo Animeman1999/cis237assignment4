@@ -19,7 +19,7 @@ namespace cis237assignment4
         //***************************************
         IDroid[] droidItemsCollection;
         int droidItemsLengthInt;
-        IDroid[] aux;
+        MergeSort mergeSort;
 
         //Ceate each of the 4 stack types.
         MyStack<Protocol> protocolStack = new MyStack<Protocol>();
@@ -160,77 +160,7 @@ namespace cis237assignment4
         {
             return droidItemsCollection[WhichDroid].ToString();
         }
-
-        /// <summary>
-        /// Merges the sorted array for a merge sort
-        /// </summary>
-        /// <param name="compareableCoellction">IComparable</param>
-        /// <param name="low">int</param>
-        /// <param name="mid">int</param>
-        /// <param name="high">int</param>
-        public void Merge(IComparable[] compareableCoellction, int low, int mid, int high)
-        {
-            int lowInt = low;              //start index for first half of the array
-            int MidPlus = mid + 1;           //Start index for second half of the array
-            
-            for (int inidex = low; inidex <= high; inidex++)  //Copy array
-            {
-                aux[inidex] = (Droid)compareableCoellction[inidex];
-
-
-            }
-            for (int index = low; index <= high; index++)
-            {
-
-                if (lowInt > mid)  //If past end
-                {
-                    compareableCoellction[index] = aux[MidPlus++];
-                }
-                else
-                {
-                    if (MidPlus > high) //If past end
-                    {
-                        compareableCoellction[index] = aux[lowInt++];
-                    }
-
-                    else
-                    {//This is where Icomparable is used to make this class generic. 
-                        //Test which item is bigger.
-                        int compareInt = aux[MidPlus].CompareTo(aux[lowInt]);
-                        if (compareInt < 0)
-                        {
-                            compareableCoellction[index] = aux[MidPlus++];
-                        }
-                        else
-                        {
-                            compareableCoellction[index] = aux[lowInt++];
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Merge Sort that can take in any IComparable array
-        /// </summary>
-        /// <param name="compareableColelction">Icomparable</param>
-        /// <param name="low">int</param>
-        /// <param name="high">int</param>
-        public void Sort(IComparable[] compareableColelction, int low, int high)
-        {
-
-            if (high <= low) //Base Case - this is when you are down to the one element base arrary
-            {
-                return;
-            }
-            int mid = low + (high - low) / 2;  //Get the mid point of the array(split the array in half)
-
-            Sort(compareableColelction, low, mid);           // Left half split
-
-            Sort(compareableColelction, mid + 1, high);        //Right half split
-
-            Merge(compareableColelction, low, mid, high);          //Will not get to this step till after the base case has happened and it is walking out of the recursion
-        }
+        
         /// <summary>
         /// Used to start the merge sort
         /// </summary>
@@ -238,7 +168,7 @@ namespace cis237assignment4
         /// <param name="droidCollectionSize">int</param>
         public void StartSort(DroidCollection droidCollection, int droidCollectionSize)
         {
-            Sort(droidItemsCollection, 0, droidItemsLengthInt - 1);
+            mergeSort.Sort(droidItemsCollection, 0, droidItemsLengthInt - 1);
         }
 
         /// <summary>
@@ -333,14 +263,14 @@ namespace cis237assignment4
         //Constructor
         //***************************************
         /// <summary>
-        /// Create the DroidCollection and initialize the arrays that it uses.
+        /// Create the DroidCollection and initialize the array that it uses and mergSort.
         /// </summary>
         /// <param name="Size"></param>
         public DroidCollection(int Size)
         {
             droidItemsCollection = new Droid[Size];
             droidItemsLengthInt = 0;
-            aux = new Droid[Size];
+            mergeSort = new MergeSort(Size);
         }
 
     }
