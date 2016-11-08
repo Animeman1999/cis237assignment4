@@ -114,28 +114,31 @@ namespace cis237assignment4.Tests
         [TestMethod()]
         public void PrintDroidListTest()
         {
-            string[] droidList = { "" };
-            string[] droidList1 = { "Test1" };
-            string[] droidList2 = { "Test1", "Test2" };
+            DroidCollection testDroidCollection = new DroidCollection(10);
+            CSVProcessor csvProcessor = new CSVProcessor();
+            csvProcessor.ReadFile("../../../Files/4DroidModelTest.csv", testDroidCollection);
 
             StringBuilder actualOutput = replaceConsole();
 
-            testUI.PrintDroidList(droidList1);
+            testUI.PrintDroidList(testDroidCollection.GetListOfAllDroids());
 
             StringAssert.Contains(actualOutput.ToString(), "Start List");
-            StringAssert.Contains(actualOutput.ToString(), "Test1");
-            StringAssert.Contains(actualOutput.ToString(), "End List");
+            StringAssert.Contains(actualOutput.ToString(), "Protocol");
+            StringAssert.Contains(actualOutput.ToString(), "Utility");
+            StringAssert.Contains(actualOutput.ToString(), "Janitor");
+            StringAssert.Contains(actualOutput.ToString(), "Protocol");
+            StringAssert.Contains(actualOutput.ToString(), "Astromech");
 
 
-            actualOutput = replaceConsole();
-            testUI.PrintDroidList(droidList2);
-            StringAssert.Contains(actualOutput.ToString(), "Test2");
+            //actualOutput = replaceConsole();
+            //testUI.PrintDroidList(droidList2);
+            //StringAssert.Contains(actualOutput.ToString(), "Test2");
 
 
-            actualOutput = replaceConsole();
-            testUI.PrintDroidList(droidList);
-            StringAssert.Contains(actualOutput.ToString(), "Start List");
-            StringAssert.Contains(actualOutput.ToString(), "End List");
+            //actualOutput = replaceConsole();
+            //testUI.PrintDroidList(droidList);
+            //StringAssert.Contains(actualOutput.ToString(), "Start List");
+            //StringAssert.Contains(actualOutput.ToString(), "End List");
 
         }
 
