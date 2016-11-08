@@ -1,4 +1,7 @@
-﻿using System;
+﻿//Jeffrey Martin
+//CIS 237 Assignment 4
+//Due 11-08-2016
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
