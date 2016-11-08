@@ -9,7 +9,7 @@ namespace cis237assignment4
     /// <summary>
     /// Create a generic Que class based on the GenericLinkedList
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">Object</typeparam>
     class Que<T> : GenericLinkedList<T>
     {
         //***************************************
@@ -18,7 +18,7 @@ namespace cis237assignment4
         /// <summary>
         /// When adding an item to the Que it goes to the back of the list
         /// </summary>
-        /// <param name="GenericData"></param>
+        /// <param name="GenericData">Object</param>
         public void Enqueue (T GenericData)
         {
             base.AddToBack(GenericData);
@@ -27,7 +27,7 @@ namespace cis237assignment4
         /// <summary>
         /// When removing an item from the Que take it from the front of the list
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Object</returns>
         public T Dequeue ()
         {
             return base.RemoveFromFront();
