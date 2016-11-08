@@ -85,7 +85,7 @@ Be sure to think about what the time complexity for the bucket sort will be. Thi
 
 ## Outside Resources Used
 
-None - I examined about 20 websites inorder to try and figure out how to use DroidCollectoin directly as the IComparabe Array. None of them helped me solve the issue so they were not listed. In the endy I simply went though each droid in DroidCollection and put it into an IComparabe array and then passed it into the merge sort.  I found this issue frustrating for it seems that there should be a way to use DroidCollection directly.
+None - I examined about 20 webpages inorder to try and figure out how to use DroidCollectoin directly in the IComparabe Array. None of them helped me solve the issue so they were not listed. In the end I simply examined the examples given in class and finally figured out how IComparabe works and it's implementation. For some reason I was not understanding the concept of defining ("public var ComapreTo(object obj)") the IComparabe object was needed to define how "CompareTo" would work in the method that was taking in the IComparabe defined object.
 
 ## Known Problems, Issues, And/Or Errors in the Program
 
