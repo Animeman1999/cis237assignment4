@@ -48,9 +48,9 @@ namespace cis237assignment4.Tests
             Protocol actualProtocol2 = testProtocolStac.Pop();
             Protocol actualProtocol3 = testProtocolStac.Pop();
 
-            Assert.AreEqual(testProtocol1, actualProtocol1);
+            Assert.AreEqual(testProtocol3, actualProtocol1);
             Assert.AreEqual(testProtocol2, actualProtocol2);
-            Assert.AreEqual(testProtocol3, actualProtocol3);
+            Assert.AreEqual(testProtocol1, actualProtocol3);
         }
 
         ///Redundant since used in PushTest and PopTest

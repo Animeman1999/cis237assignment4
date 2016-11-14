@@ -20,12 +20,12 @@ namespace cis237assignment4
         //***************************************
 
         /// <summary>
-        /// When adding an item to the stack add it to the back
+        /// When adding an item to the stack add it to the Front
         /// </summary>
         /// <param name="GenericData"></param>
         public void Push(T GenericData)
         {
-            base.AddToBack(GenericData);
+            base.AddToFront(GenericData);
         }
 
         /// <summary>
